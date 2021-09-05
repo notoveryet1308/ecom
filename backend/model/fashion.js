@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { productSchema, productHighlightSchema } from './product'
+import { productSchema } from './product'
 
 const fashionSizeSchema = new mongoose.Schema({
   display: {
@@ -16,9 +16,25 @@ const fashionSizeSchema = new mongoose.Schema({
   },
 })
 
+const productHighlightSchema = {
+  label: {
+    type: String,
+    required: [true, 'Product highlight label is required'],
+  },
+  description: {
+    type: String,
+    required: [true, 'Product highlight description is required'],
+    trim: true,
+  },
+}
 const fashionSchema = new mongoose.Schema({
   ...productSchema,
   productDetail: [productHighlightSchema],
+  sutiableFor: {
+    type: String,
+    required: [true, 'this clothe is sutiable for info is required.'],
+    enum: ['men', 'women'],
+  },
   sizes: {
     type: [fashionSizeSchema],
     required: [true, 'clothes sizes are required'],

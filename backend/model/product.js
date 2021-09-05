@@ -1,24 +1,3 @@
-const productHighlightSchema = {
-  label: {
-    type: String,
-    required: [true, 'Product highlight label is required'],
-  },
-  description: {
-    type: String,
-    required: [true, 'Product highlight description is required'],
-    trim: true,
-  },
-}
-
-const productSpecificationSchema = {
-  detail: {
-    type: String,
-    required: [true, 'Product specification detail is required'],
-    trim: true,
-  },
-  photo: String,
-}
-
 const productSellerInfo = {
   name: {
     type: String,
@@ -35,6 +14,13 @@ const productSellerInfo = {
   zipCode: {
     type: Number,
     required: [true, 'Provide seller`s loction zip code'],
+  },
+}
+const keyValueSchema = {
+  label: { type: String, required: [true, 'provide label for the feature'] },
+  description: {
+    type: String,
+    required: [true, 'Provide description of this feature'],
   },
 }
 
@@ -66,7 +52,22 @@ const productSchema = {
   },
   category: {
     type: String,
-    required: [true, 'Product category is required'],
+    required: [
+      true,
+      'Provide product category, it could be fashion|electronics',
+    ],
+  },
+  color: {
+    type: [String],
+    required: [true, 'Provide available color'],
+    default: undefined,
+  },
+  subCategory: {
+    type: String,
+    required: [
+      true,
+      'Provide product category, it could be topwaer|bottomwear|mobile|footear|laptop|footwear',
+    ],
   },
   tags: {
     type: [String],
@@ -79,11 +80,4 @@ const productSchema = {
   },
 }
 
-// const Product = mongoose.model('product', productSchema)
-export {
-  // Product,
-  productSchema,
-  productHighlightSchema,
-  productSpecificationSchema,
-  productSellerInfo,
-}
+export { productSchema, keyValueSchema }
