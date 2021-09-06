@@ -14,6 +14,20 @@ const createProduct = catchAsync(async (req, res, next) => {
     },
   })
 })
+const getProduct = catchAsync(async (req, res, next) => {
+  const { productType, id } = req.params
+  const Product = ProductModels[productType]
+  const product = await Product.findById(id)
+  if (!product) {
+    return next(new AppError('Invaild ID!', 400))
+  }
+  res.status(200).json({
+    status: 'success',
+    data: {
+      product,
+    },
+  })
+})
 
 const updateProduct = catchAsync(async (req, res, next) => {
   const { productType, id } = req.params
@@ -45,4 +59,4 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   })
 })
 
-export { createProduct, updateProduct, deleteProduct }
+export { createProduct, updateProduct, deleteProduct, getProduct }
