@@ -1,7 +1,7 @@
 import FashionProduct from '../model/fashion'
-import catchAsync from '../utils/catchAsync'
+import catchAsync from '../utils/CatchAsync'
 import AppError from '../utils/AppError'
-import ApiFeatures from '../utils/ApiFarures'
+import ApiFeatures from '../utils/ApiFeatures'
 
 const getAllFashionProduct = catchAsync(async (req, res, next) => {
   const processedProduct = new ApiFeatures(

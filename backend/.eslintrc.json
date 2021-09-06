@@ -15,6 +15,7 @@
       { "argsIgnorePattern": "req|res|next|val|process" }
     ],
     "object-shorthand": "off",
-    "radix":"off"
+    "radix":"off",
+    "consistent-return": "off"
   }
 }

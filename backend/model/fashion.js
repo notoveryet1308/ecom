@@ -8,7 +8,7 @@ const fashionSizeSchema = new mongoose.Schema({
   },
   value: {
     type: String,
-    required: [true, 'Provie size value'],
+    required: [true, 'Provie size detail'],
   },
   inStock: {
     type: Boolean,
@@ -30,14 +30,19 @@ const productHighlightSchema = {
 const fashionSchema = new mongoose.Schema({
   ...productSchema,
   productDetail: [productHighlightSchema],
-  sutiableFor: {
+  idealFor: {
     type: String,
-    required: [true, 'this clothe is sutiable for info is required.'],
+    required: [true, 'this clothe is ideal for info is required.'],
     enum: ['men', 'women'],
   },
-  sizes: {
+  availableSize: {
     type: [fashionSizeSchema],
-    required: [true, 'clothes sizes are required'],
+    required: [true, 'provide all available sizes.'],
+    default: undefined,
+  },
+  size: {
+    type: [String],
+    required: [true, 'Provie size values'],
     default: undefined,
   },
 })
