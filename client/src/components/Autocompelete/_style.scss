@@ -1,0 +1,42 @@
+.autocomplete-container{
+  position: relative;
+  width: 100%;
+
+  .autocomplete__input{
+    position: relative;
+    width: 100%;
+    height: 4rem; 
+    z-index: 2;
+    .autocmplete__searchInput{
+      border: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: space-between;
+      height: 100%;
+      padding: .2rem 2rem;
+      border-radius: 4rem;
+      background-color: #f6f6f6;
+      #searchInput{
+        border: none;
+        width: 90%;
+        height: 100%;
+        background-color: #f6f6f6;
+        font-family: 'Noto Sans', sans-serif;
+        outline: none;
+      }
+      
+    }
+  }
+
+  .autocomplete__display{
+    // position: absolute;
+    // top: 3rem;
+    // width: 100%;
+    // height: 30rem;
+    // background-color: red;
+    // z-index: 1;
+  }
+}
+
+.searchIcon{
+  font-size: 3.2rem;
+}

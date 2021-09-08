@@ -1,0 +1,48 @@
+.header-container{
+  width: 100%;
+  position: relative;
+  height: 7rem;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr;
+  
+  align-items: center;
+  // justify-content: space-between;
+
+  .autocomplete__outerWrapper{
+    // width: 40rem;
+    padding: 0 2rem;
+  }
+
+  .header-action{
+
+    display: flex;
+    justify-content: space-between;
+    .language__outerWrapper{
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .header-action__nav{
+      display: flex;
+      .login-or-profile__outerWrapper{
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .cart__outerWrapper{
+        padding-left: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    
+  }
+  
+}
