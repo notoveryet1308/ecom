@@ -14,6 +14,10 @@ class Home {
       </div>
     `
 	}
+
+	afterRender() {
+		Header.afterRender()
+	}
 }
 
 export default Home

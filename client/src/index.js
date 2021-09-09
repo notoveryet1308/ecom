@@ -17,6 +17,8 @@ const initApp = async (route) => {
 	const page = new PageToBeRnder(resource, params)
 	root.innerHTML = null
 	root.insertAdjacentHTML('beforeend', await page.render())
+	// after render
+	page.afterRender()
 }
 
 initApp(initialRoute)
@@ -26,3 +28,4 @@ window.addEventListener('hashchange', () => {
 	const routeInfo = getRouteDetail()
 	initApp(routeInfo)
 })
+

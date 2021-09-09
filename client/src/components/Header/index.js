@@ -6,6 +6,9 @@ import Language from '../Language'
 import './_style.scss'
 
 const Header = {
+	afterRender: () => {
+		AutocompleteSearch.afterRender()
+	},
 	render: () => `
     <header class='header-container'>
      ${Logo.render()}
