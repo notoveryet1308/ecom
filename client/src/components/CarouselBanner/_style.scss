@@ -1,0 +1,25 @@
+.carosuelBanner-container{
+  width: 100%;
+  height: 28rem;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  .carosuelBanner-content{
+    background: #fff;
+    height: 100%;
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.1);
+    display: flex;
+    .carosuelBanner-link{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      // transform: translateX(-400%);
+      transition: transform 300ms ease;
+      .carosuelBanner-image{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+  }
+}

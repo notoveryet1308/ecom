@@ -7,14 +7,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #08bd813d;
+    padding: .5rem 1rem;
+    cursor: pointer;
     .language-selected{
       font-size: 1.6rem;
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 }
 
 .caret{
-  font-size: 2rem;
+  font-size: 1.6rem;
   cursor: pointer;
 }

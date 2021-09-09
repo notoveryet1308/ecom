@@ -1,4 +1,10 @@
 .home-container{
   width: 100%;
   position: relative;
+  .home-content{
+    width: 100%;
+    min-height: 100vh;
+    background: #f6f6f6;
+    // color: #08bd81;
+  }
 }
