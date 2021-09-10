@@ -30,29 +30,25 @@ const Carosuel = {
 
 const CarouselBanner = {
 	afterRender: () => {
-		const carosuelLinks = [...document.querySelectorAll('.carosuelBanner-link')]
-		let carosuelCounter = 0
-		setInterval(() => {
-			if (carosuelLinks.length === carosuelCounter) {
-				carosuelCounter = 0
-				carosuelLinks.forEach((node) => {
-					node.style.transform = null
-				})
+		const carosuelContainer = document.querySelector('.carosuelBanner-content')
+		const initCarosuelData = carosuelData[0]
+    carosuelContainer.insertAdjacentHTML('beforeend', Carosuel.render({ ...initCarosuelData }))
+		let carosuelCounter = 1;
+    setInterval(() => {
+			if (carosuelCounter === carosuelData.length) {
+				carosuelCounter = 0;
 			}
-			const currentCarosuel = carosuelLinks[carosuelCounter]
-			currentCarosuel.style.transform = `translateX(${-(
-				carosuelCounter * 100
-			)}%)`
-
-			carosuelCounter += 1
+			carosuelContainer.innerHTML = null
+			const currentCarosuel = carosuelCounter;
+			const data = carosuelData[currentCarosuel]
+			carosuelContainer.insertAdjacentHTML('beforeend', Carosuel.render({ ...data }))
+			carosuelCounter += 1;
 		}, 5000)
 	},
 	render: () => `
     <div class='carosuelBanner-container'>
-      <div class='carosuelBanner-content' style="width: ${
-				carosuelData.length * 100
-			}%">
-         ${carosuelData.map((el) => Carosuel.render({ ...el })).join('\n')}
+      <div class='carosuelBanner-content'>
+        
       </div>
     </div>
   `,
