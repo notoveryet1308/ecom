@@ -21,7 +21,7 @@ const Header = {
       </div>
       <div class='header-action__nav'>
         <div class='login-or-profile__outerWrapper'>
-          ${LinkButtonPrimary.render({ to: '/login', display: 'Login' })}
+          ${LinkButtonPrimary.render({ to: '/account/login', display: 'Login' })}
         </div> 
         <div class='cart__outerWrapper'>
           ${LinkIconButton.render({

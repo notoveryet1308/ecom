@@ -1,4 +1,5 @@
 import './index.scss'
+import Auth from './pages/Auth'
 import Home from './pages/Home'
 import ProductListing from './pages/ProductListing'
 import { handleRootRouting, getRouteDetail } from './util/routing'
@@ -6,6 +7,7 @@ import { handleRootRouting, getRouteDetail } from './util/routing'
 const routesAndPages = {
 	home: Home,
 	clothing: ProductListing,
+	account: Auth,
 }
 
 const root = document.getElementById('root')

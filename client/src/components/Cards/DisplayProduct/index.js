@@ -27,8 +27,9 @@ const DisplayProduct = {
 								discountPrice ? 'inOffer' : ''
 							}'>₹${price}</p>
               <p class='displayProduct-offer'>
-               ${offPercentage ? offPercentage : ' '}
-               ${offPercentage ? '% off' : ' '}
+               ${offPercentage ? offPercentage : ''}${
+			offPercentage ? '% off' : ''
+		}
               </p>
             </div>
           </div>        
