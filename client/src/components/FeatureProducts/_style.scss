@@ -1,0 +1,32 @@
+.featureProduct-container{
+  width: 100%;
+  padding: 0 1.5rem;
+  padding-top: 1rem;
+
+  .featureProduct-content{
+    width: 100%;
+    min-height: 30rem;
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+
+    .featureProduct__label{
+      padding: 0 2rem;
+      width: 100%;
+      height: 7rem;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &-text{
+        font-size: 2.5rem;
+      }
+    }
+    .featureProduct__list{
+      display: flex;
+      align-items: center;
+      min-height: 23rem;
+      padding: 0 1.5rem;
+    }
+  }
+}

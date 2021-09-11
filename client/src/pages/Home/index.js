@@ -1,4 +1,5 @@
 import CarouselBanner from '../../components/CarouselBanner'
+import FeatureProducts from '../../components/FeatureProducts'
 import Header from '../../components/Header'
 import MainNavigation from '../../components/MainNvigation'
 import './_style.scss'
@@ -16,15 +17,17 @@ class Home {
 				${MainNavigation.render()}
 				<div class='home-content'>
 				   ${CarouselBanner.render()}
+					 ${FeatureProducts.render()}
 				</div>
       </div>
     `
 	}
 
-	afterRender() {
+	async afterRender() {
 		Header.afterRender()
 		MainNavigation.afterRender()
 		CarouselBanner.afterRender()
+		await FeatureProducts.afterRender()
 	}
 }
 

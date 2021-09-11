@@ -19,6 +19,8 @@
         "class-methods-use-this":"off",
         "implicit-arrow-linebreak":"off",
         "function-paren-newline":"off",
-        "no-param-reassign":"warn"
+        "no-param-reassign":"warn",
+        "object-curly-newline":"off",
+        "radix":"off"
     }
 }

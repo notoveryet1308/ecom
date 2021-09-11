@@ -50,11 +50,18 @@ const productSchema = {
       message: 'Discount price should always be less than original price',
     },
   },
+  type:{
+    type: String,
+    required: [
+      true,
+      'Provide product type, it could be fashion|electronics',
+    ],
+  },
   category: {
     type: String,
     required: [
       true,
-      'Provide product category, it could be fashion|electronics',
+      'Provide product category, it could be mobile|laptop|men|women',
     ],
   },
   color: {
@@ -66,7 +73,7 @@ const productSchema = {
     type: String,
     required: [
       true,
-      'Provide product category, it could be topwaer|bottomwear|mobile|footear|laptop|footwear',
+      'Provide product category, it could be topwaer|bottomwear|budget|premium',
     ],
   },
   tags: {
@@ -78,6 +85,7 @@ const productSchema = {
     type: productSellerInfo,
     required: [true, 'Provide product sellers infomation'],
   },
+  isDealOfTheDay: { type: Boolean, default: false },
 }
 
 export { productSchema, keyValueSchema }

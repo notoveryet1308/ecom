@@ -4,6 +4,7 @@ import {
   updateProduct,
   deleteProduct,
   getProduct,
+  getEverydayInOfferProducts,
 } from '../controller/product'
 
 const router = express.Router()
@@ -14,5 +15,7 @@ router
   .patch(updateProduct)
   .delete(deleteProduct)
   .get(getProduct)
+
+router.route('/deal-of-the-day').get(getEverydayInOfferProducts)
 
 export default router

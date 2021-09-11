@@ -18,7 +18,7 @@ const initApp = async (route) => {
 	root.innerHTML = null
 	root.insertAdjacentHTML('beforeend', await page.render())
 	// after render
-	page.afterRender()
+  await page.afterRender()
 }
 
 initApp(initialRoute)

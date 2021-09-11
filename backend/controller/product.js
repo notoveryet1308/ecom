@@ -1,4 +1,6 @@
 import ProductModels from '../model'
+import EverydayOffer from '../model/everyDayOffer'
+import ProductList from '../model/productList'
 import AppError from '../utils/AppError'
 import catchAsync from '../utils/CatchAsync'
 
@@ -7,6 +9,13 @@ const createProduct = catchAsync(async (req, res, next) => {
   const Product = ProductModels[productType]
   const product = await Product.create(req.body)
 
+  await ProductList.create({ product: product._id, productType: product.type })
+  if (product.isDealOfTheDay) {
+    await EverydayOffer.create({
+      product: { ...req.body },
+      productId: product._id,
+    })
+  }
   res.status(201).json({
     status: 'success',
     data: {
@@ -14,6 +23,7 @@ const createProduct = catchAsync(async (req, res, next) => {
     },
   })
 })
+
 const getProduct = catchAsync(async (req, res, next) => {
   const { productType, id } = req.params
   const Product = ProductModels[productType]
@@ -59,4 +69,18 @@ const deleteProduct = catchAsync(async (req, res, next) => {
   })
 })
 
-export { createProduct, updateProduct, deleteProduct, getProduct }
+const getEverydayInOfferProducts = catchAsync(async (req, res, next) => {
+  const inOfferProduct = await EverydayOffer.find({})
+  res.status(200).json({
+    status: 'success',
+    data: inOfferProduct,
+  })
+})
+
+export {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getProduct,
+  getEverydayInOfferProducts,
+}

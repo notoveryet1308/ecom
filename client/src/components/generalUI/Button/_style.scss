@@ -12,13 +12,24 @@
 
 .linkButton{
   text-decoration: none;
+  font-size: 1.6rem;
+  text-align: center;
 }
 
 .linkButton-Primary{
   background-color: #08BD80;
   color: #fff;
-  font-size: 1.6rem;
-  text-align: center;
+}
+
+.linkButton-Tertiary{
+  color: #08BD80;
+  border: 2px solid #08BD80;
+  transition: all 300ms ease;
+  &:hover{
+    background-color: #08BD80;
+    color: #fff;
+    transition: all 300ms ease;
+  }
 }
 
 .linkIconButton{

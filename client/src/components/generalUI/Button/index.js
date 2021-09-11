@@ -8,6 +8,14 @@ const LinkButtonPrimary = {
   `,
 }
 
+const LinkButtonTertiary = {
+	render: ({ to, display }) => `
+    <div class='button-container'>
+      <a href='#${to}' class='linkButton linkButton-Tertiary button'>${display}</a>
+    </div>
+  `,
+}
+
 const LinkIconButton = {
 	render: ({ to, display, icon }) => `
   <div class='button-container'>
@@ -20,4 +28,4 @@ const LinkIconButton = {
   `,
 }
 
-export { LinkButtonPrimary, LinkIconButton }
+export { LinkButtonPrimary, LinkIconButton, LinkButtonTertiary }
