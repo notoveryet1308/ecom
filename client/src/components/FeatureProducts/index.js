@@ -1,4 +1,4 @@
-import getEveryDayDeal from '../../API'
+import { getEveryDayDeal } from '../../API'
 import { LinkButtonTertiary } from '../generalUI/Button'
 import Loader from '../generalUI/Loader'
 import './_style.scss'

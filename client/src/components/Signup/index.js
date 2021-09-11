@@ -1,4 +1,6 @@
+import { signupUser } from '../../API'
 import login from '../../images/login.jpg'
+import LocalStorage from '../../util/LocalStorage'
 import './_style.scss'
 
 const handleAuthInputLabel = ({ labelSelector, value }) => {
@@ -17,7 +19,7 @@ const Signup = {
 		const signupInputs = [...document.querySelectorAll('.auth-input')]
 		let signupDetail = {
 			email: null,
-			name: null,
+			fullname: null,
 			password: null,
 			confirmPassword: null,
 		}
@@ -35,8 +37,16 @@ const Signup = {
 			})
 		})
 
-		signupBtn.addEventListener('click', (e) => {
-			console.log({ signupDetail })
+		signupBtn.addEventListener('click', async () => {
+			if (
+				signupDetail.email &&
+				signupDetail.fullname &&
+				signupDetail.password === signupDetail.confirmPassword
+			) {
+				const token = await signupUser({ signupDetail })
+				LocalStorage.setItem('user-auth-token', token)
+				window.location.replace('#/home')
+			}
 		})
 	},
 
@@ -49,8 +59,8 @@ const Signup = {
         </div>
         <div class='signup__inputs'>
            <div class='auth__input-filed'>
-             <label class='auth__input-filed--label signup-nameLabel'>Enter your fullname</label>
-             <input name='name' required class='auth-input signup-name signup-input' type='text' />
+             <label class='auth__input-filed--label signup-fullnameLabel'>Enter your fullname</label>
+             <input name='fullname' required class='auth-input signup-name signup-input' type='text' />
            </div>
            <div class='auth__input-filed'>
             <label class='auth__input-filed--label signup-emailLabel'>Enter Email Address</label>
@@ -62,7 +72,7 @@ const Signup = {
            </div>
            <div class='auth__input-filed'>
               <label class='auth__input-filed--label signup-confirmPasswordLabel'>Confirm password</label>
-              <input name='confirmPassword' required class='auth-input signup-pasword signup-input' type='text' />
+              <input name='confirmPassword'  required class='auth-input signup-pasword signup-input' type='text' />
            </div>
            <div class='signup__submit'>
              <button class='signup__submit-btn'>Signup</button>

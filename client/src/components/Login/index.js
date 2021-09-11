@@ -1,4 +1,6 @@
+import { loginUser } from '../../API'
 import login from '../../images/login.jpg'
+import LocalStorage from '../../util/LocalStorage'
 import './_style.scss'
 
 const handleAuthInputLabel = ({ labelSelector, value }) => {
@@ -13,7 +15,7 @@ const handleAuthInputLabel = ({ labelSelector, value }) => {
 }
 
 const Login = {
-	afterRender: () => {
+	afterRender: async () => {
 		const loginInputs = [...document.querySelectorAll('.login-input')]
 		const loginBtn = document.querySelector('.login__submit-btn')
 		let loginDetail = { email: null, password: null }
@@ -28,7 +30,13 @@ const Login = {
 			})
 		})
 
-		loginBtn.addEventListener('click', (e) => {})
+		loginBtn.addEventListener('click', async () => {
+      if (loginDetail.email && loginDetail.password) {
+       const token = await loginUser({ loginDetail })
+       LocalStorage.setItem('user-auth-token', token)
+       window.location.replace('#/home')
+      }
+    })
 	},
 	render: () => `
       <div class ='login'>

@@ -12,4 +12,20 @@ const getEveryDayDeal = async () => {
 	return response.data
 }
 
-export default getEveryDayDeal
+const loginUser = async ({ loginDetail }) => {
+  const response = await axios.post(`${baseUrl}/user/login`, { ...loginDetail })
+	if (response.data.status === 'success') {
+		return response.data.token
+	}
+	return response.data
+}
+
+const signupUser = async ({ signupDetail }) => {
+	const response = await axios.post(`${baseUrl}/user/signup`, { ...signupDetail })
+	if (response.data.status === 'success') {
+		return response.data.token
+	}
+	return response.data
+}
+
+export { getEveryDayDeal, loginUser, signupUser }

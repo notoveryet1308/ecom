@@ -1,3 +1,4 @@
+import LocalStorage from '../../util/LocalStorage'
 import AutocompleteSearch from '../Autocompelete'
 import { LinkButtonPrimary, LinkIconButton } from '../generalUI/Button'
 import Logo from '../generalUI/logo'
@@ -9,7 +10,9 @@ const Header = {
 	afterRender: () => {
 		AutocompleteSearch.afterRender()
 	},
-	render: () => `
+	render: () => {
+  const isLoggedIn = LocalStorage.getItem('user-auth-token')
+  return `
     <header class='header-container'>
      ${Logo.render()}
      <div class='autocomplete__outerWrapper'>
@@ -21,7 +24,7 @@ const Header = {
       </div>
       <div class='header-action__nav'>
         <div class='login-or-profile__outerWrapper'>
-          ${LinkButtonPrimary.render({ to: '/account/login', display: 'Login' })}
+          ${!isLoggedIn ? LinkButtonPrimary.render({ to: '/account/login', display: 'Login' }) : 'Profile'}
         </div> 
         <div class='cart__outerWrapper'>
           ${LinkIconButton.render({
@@ -33,7 +36,7 @@ const Header = {
       </div>
      </div> 
     </header>
-    `,
+    `},
 }
 
 export default Header
