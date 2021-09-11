@@ -1,49 +1,58 @@
-import { getEveryDayDeal } from '../../API'
 import { LinkButtonTertiary } from '../generalUI/Button'
 import Loader from '../generalUI/Loader'
 import './_style.scss'
 import DisplayProuctCard from '../Cards/DisplayProduct'
+import { images } from '../../data'
 
-import placeholder from '../../images/placeholder.jpg'
+class FeatureProducts {
+	constructor(makeaApiRequest, params, identifier) {
+		this.makeaApiRequest = makeaApiRequest
+		this.params = params
+		this.identifier = identifier
+	}
 
-const FeatureProducts = {
-	afterRender: async () => {
-		const productListContainer = document.querySelector('.featureProduct__list')
-		const productList = await getEveryDayDeal()
+	render({ featureTitle }) {
+		return `
+		<section class='featureProduct-container'>
+		  <div class='featureProduct-content'>
+		  	<div class='featureProduct__label'>
+			  	<p class='featureProduct__label-text'>${featureTitle}</p>
+			  	${LinkButtonTertiary.render({ to: '#', display: 'View All' })}
+			  </div>
+			  <div class='featureProduct__list featureProduct__list-${this.identifier}'>
+				  ${Loader.render()}
+			  </div>
+		  </div>
+	 </section>
+	`
+	}
+
+	async afterRender() {
+		const productListContainer = document.querySelector(
+			`.featureProduct__list-${this.identifier}`,
+		)
+		let productList = await this.makeaApiRequest({ params: this.params })
 		if (productList.length) {
+			productList = productList.splice(3, 5)
 			productListContainer.innerHTML = null
 			productListContainer.insertAdjacentHTML(
 				'beforeend',
 				productList
-					.map((data) => {
-						console.log({ data })
-						return DisplayProuctCard.render({
-							id: data.productId,
-							price: data.product.price,
-							productType: data.product.type,
-							name: data.product.name,
-							brand: data.product.brand,
-							image: placeholder,
-							discountPrice: data.product.discountPrice,
-						})
-					})
+					.map((data) =>
+						DisplayProuctCard.render({
+							id: data._id,
+							price: data.price,
+							productType: data.type,
+							name: data.name,
+							brand: data.brand,
+							imageUrl: images[data.imageUrl],
+							discountPrice: data.discountPrice,
+						}),
+					)
 					.join('\n'),
 			)
 		}
-	},
-	render: () => `
-        <section class='featureProduct-container'>
-          <div class='featureProduct-content'>
-            <div class='featureProduct__label'>
-              <p class='featureProduct__label-text'>Deals of the day</p>
-              ${LinkButtonTertiary.render({ to: '#', display: 'View All' })}
-            </div>
-            <div class='featureProduct__list'>
-              ${Loader.render()}
-            </div>
-          </div>
-        </section>
-      `,
+	}
 }
 
 export default FeatureProducts

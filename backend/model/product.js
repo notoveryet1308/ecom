@@ -17,8 +17,8 @@ const productSellerInfo = {
   },
 }
 const keyValueSchema = {
-  label: { type: String, required: [true, 'provide label for the feature'] },
-  description: {
+  key: { type: String, required: [true, 'provide label for the feature'] },
+  value: {
     type: String,
     required: [true, 'Provide description of this feature'],
   },

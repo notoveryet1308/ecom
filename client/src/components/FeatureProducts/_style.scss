@@ -24,7 +24,9 @@
     }
     .featureProduct__list{
       display: flex;
+      justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
       min-height: 23rem;
       padding: 0 1.5rem;
     }

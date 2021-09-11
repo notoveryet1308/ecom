@@ -28,4 +28,14 @@ const signupUser = async ({ signupDetail }) => {
 	return response.data
 }
 
-export { getEveryDayDeal, loginUser, signupUser }
+const getClothingProduct = async ({ params }) => {
+	const response = await axios.get(`${baseUrl}/clothing`, {
+		params: { ...params },
+	})
+	if (response.data.status === 'success') {
+		return response.data.data.products
+	}
+	return response.data
+}
+
+export { getEveryDayDeal, loginUser, signupUser, getClothingProduct }

@@ -1,6 +1,6 @@
 .displayProduct{
   position: relative;
-  width: 23rem;
+  width: 21rem;
   padding: 1.5rem;
   .displayProduct__content{
     display: flex;
@@ -8,10 +8,16 @@
     .displayProduct__image{
       position: relative;
       width: 100%;
-      height: 100%;
+      height: 20rem;
+      overflow: hidden;
       img{
         width: 100%;
         height: 100%;
+        transition: transform 300ms ease;
+        &:hover{
+          transform: scale(1.1);
+          transition: transform 300ms ease;
+        }
       }
     }
     .displayProduct__detail{

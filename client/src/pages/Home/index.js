@@ -1,8 +1,22 @@
+import { getEveryDayDeal, getClothingProduct } from '../../API'
 import CarouselBanner from '../../components/CarouselBanner'
 import FeatureProducts from '../../components/FeatureProducts'
 import Header from '../../components/Header'
 import MainNavigation from '../../components/MainNvigation'
 import './_style.scss'
+
+const FeautureProductInOffer = new FeatureProducts(
+	getEveryDayDeal,
+	{},
+	'inOffer',
+)
+const FeatureProductFootwear = new FeatureProducts(
+	getClothingProduct,
+	{
+		subCategory: 'footwear',
+	},
+	'footwear',
+)
 
 class Home {
 	constructor(resource, params) {
@@ -17,7 +31,8 @@ class Home {
 				${MainNavigation.render()}
 				<div class='home-content'>
 				   ${CarouselBanner.render()}
-					 ${FeatureProducts.render()}
+					 ${FeautureProductInOffer.render({ featureTitle: 'Deal of the day' })}
+					 ${FeatureProductFootwear.render({ featureTitle: 'Footwear' })}
 				</div>
       </div>
     `
@@ -27,7 +42,8 @@ class Home {
 		Header.afterRender()
 		MainNavigation.afterRender()
 		CarouselBanner.afterRender()
-		await FeatureProducts.afterRender()
+		await FeautureProductInOffer.afterRender()
+		await FeatureProductFootwear.afterRender()
 	}
 }
 
