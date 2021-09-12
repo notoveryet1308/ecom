@@ -9,6 +9,7 @@ const FeautureProductInOffer = new FeatureProducts(
 	getEveryDayDeal,
 	{},
 	'inOffer',
+	'/offer/deal-of-the-day',
 )
 const FeatureProductFootwear = new FeatureProducts(
 	getClothingProduct,
@@ -16,6 +17,7 @@ const FeatureProductFootwear = new FeatureProducts(
 		subCategory: 'footwear',
 	},
 	'footwear',
+	'/clothing/footwear',
 )
 
 class Home {

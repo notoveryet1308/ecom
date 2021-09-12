@@ -5,10 +5,11 @@ import DisplayProuctCard from '../Cards/DisplayProduct'
 import { images } from '../../data'
 
 class FeatureProducts {
-	constructor(makeaApiRequest, params, identifier) {
+	constructor(makeaApiRequest, params, identifier, href) {
 		this.makeaApiRequest = makeaApiRequest
 		this.params = params
 		this.identifier = identifier
+		this.href = href
 	}
 
 	render({ featureTitle }) {
@@ -17,7 +18,7 @@ class FeatureProducts {
 		  <div class='featureProduct-content'>
 		  	<div class='featureProduct__label'>
 			  	<p class='featureProduct__label-text'>${featureTitle}</p>
-			  	${LinkButtonTertiary.render({ to: '#', display: 'View All' })}
+			  	${LinkButtonTertiary.render({ to: `${this.href}`, display: 'View All' })}
 			  </div>
 			  <div class='featureProduct__list featureProduct__list-${this.identifier}'>
 				  ${Loader.render()}

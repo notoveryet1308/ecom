@@ -8,9 +8,10 @@ import { images } from '../../data'
 import './_style.scss'
 
 class ProductListing {
-	constructor(resource, params) {
+	constructor(resource, params, apiCall) {
 		this.resource = resource
 		this.params = params
+		this.apiCall = apiCall
 	}
 
 	async render() {
@@ -36,7 +37,8 @@ class ProductListing {
 		Header.afterRender()
 		MainNavigation.afterRender()
 		const productList = document.querySelector('.productListing-products')
-		const products = await getClothingProduct({ params: this.params })
+		const products = await this.apiCall({ params: this.params })
+		console.log({ products })
 		if (products.length) {
 			productList.innerHTML = null
 			productList.style.display = 'grid'

@@ -1,4 +1,4 @@
-const routeList = ['#', '#/clothing/:category/:subCategory', '#/account/:authType']
+const routeList = ['#', '#/clothing/:subCategory/:category', '#/account/:authType', '#/offer/:deal']
 
 const matchCurrentRouteAndGetParams = (resources, routes) => {
 	const currentRoute = routes.find((route) => {
