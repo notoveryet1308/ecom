@@ -1,3 +1,4 @@
+import LocalStorage from '../../../util/LocalStorage'
 import './_style.scss'
 
 const LinkButtonPrimary = {
@@ -17,15 +18,34 @@ const LinkButtonTertiary = {
 }
 
 const LinkIconButton = {
-	render: ({ to, display, icon }) => `
-  <div class='button-container'>
-  
-  <a href='#${to}' class='linkButton linkIconButton'>
-  <i class="ph-${icon} icon"></i>
-  ${display}
-  </a>
-</div>
-  `,
+	render: ({ to, display, icon }) => {
+		const isLoggedIn = LocalStorage.getItem('user-auth-token')
+		return `
+      <div class='button-container'>
+        <a href='#${to}' class='linkButton linkIconButton'>
+          <i class="ph-${icon} ${isLoggedIn ? 'user-logged-in' : ''} icon"></i>
+          ${display}
+        </a>
+     </div>
+  `
+	},
+}
+class LinkIconBtn {
+	constructor(identifier) {
+		this.identifier = identifier
+	}
+
+	render({ to, display, icon }) {
+		const isLoggedIn = LocalStorage.getItem('user-auth-token')
+		return `
+    <div class='button-container'>
+        <a href='#${to}' class='linkButton linkIconButton'>
+          <i class="ph-${icon} ${isLoggedIn ? 'user-logged-in' : ''} icon"></i>
+          ${display}
+        </a>
+     </div>
+    `
+	}
 }
 
-export { LinkButtonPrimary, LinkIconButton, LinkButtonTertiary }
+export { LinkButtonPrimary, LinkIconButton, LinkButtonTertiary, LinkIconBtn }

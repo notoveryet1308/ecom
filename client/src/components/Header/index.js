@@ -1,42 +1,121 @@
 import LocalStorage from '../../util/LocalStorage'
-import AutocompleteSearch from '../Autocompelete'
+import { AutocompleteSearch2 } from '../Autocompelete'
 import { LinkButtonPrimary, LinkIconButton } from '../generalUI/Button'
+import DropdownBtn from '../generalUI/Button/Dropdown'
 import Logo from '../generalUI/logo'
-import Language from '../Language'
-
 import './_style.scss'
+
+const logoutUser = () => {
+	LocalStorage.removeItem('user-auth-token')
+	window.location.reload()
+}
+const AutocompeleteSearchMob = new AutocompleteSearch2('mobile')
+const AutocompeleteSearchNonMob = new AutocompleteSearch2('nonMobile')
+const ProfileDropdownMob = new DropdownBtn('profileDropdownMob', [
+	{
+		id: 'myprofileMOB',
+		display: 'My Profile',
+		onClick: () => window.location.replace('#/my-profile'),
+	},
+	{
+		id: 'logoutUserMOB',
+		display: 'Logout',
+		onClick: logoutUser,
+	},
+])
+const ProfileDropdownNonMob = new DropdownBtn('profileDropdownNonMob', [
+	{
+		id: 'myprofileNONMOB',
+		display: 'My Profile',
+		onClick: () => window.location.replace('#/my-profile'),
+	},
+	{
+		id: 'logoutUserNONMOB',
+		display: 'Logout',
+		onClick: logoutUser,
+	},
+])
 
 const Header = {
 	afterRender: () => {
-		AutocompleteSearch.afterRender()
+		const isLoggedIn = LocalStorage.getItem('user-auth-token')
+		AutocompeleteSearchMob.afterRender()
+		AutocompeleteSearchNonMob.afterRender()
+
+		if (isLoggedIn) {
+			ProfileDropdownMob.afterRender()
+			ProfileDropdownNonMob.afterRender()
+		}
 	},
 	render: () => {
-  const isLoggedIn = LocalStorage.getItem('user-auth-token')
-  return `
+		const isLoggedIn = LocalStorage.getItem('user-auth-token')
+		return `
     <header class='header-container'>
-     ${Logo.render()}
-     <div class='autocomplete__outerWrapper'>
-      ${AutocompleteSearch.render()}
-     </div>
-     <div class='header-action'>
-      <div class='language__outerWrapper'>
-        ${Language.render()}
-      </div>
-      <div class='header-action__nav'>
-        <div class='login-or-profile__outerWrapper'>
-          ${!isLoggedIn ? LinkButtonPrimary.render({ to: '/account/login', display: 'Login' }) : 'Profile'}
-        </div> 
-        <div class='cart__outerWrapper'>
-          ${LinkIconButton.render({
-						to: '/cart',
-						display: 'Cart',
-						icon: 'shopping-cart',
-					})}
+      <div class="header__mobile">
+        <div class="header__mobile-top">
+           ${Logo.render()}
+           <div class='header__action'>
+              <div class='login-or-profile__outerWrapper'>
+                 ${
+										!isLoggedIn
+											? LinkButtonPrimary.render({
+													to: '/account/login',
+													display: 'Login',
+											  })
+											: ProfileDropdownMob.render({
+													to: '/profile',
+													display: 'Profile',
+													icon: 'user-circle',
+											  })
+									}
+              </div> 
+              <div class='cart__outerWrapper'>
+                  ${LinkIconButton.render({
+										to: '/cart',
+										display: 'Cart',
+										icon: 'shopping-cart',
+									})}
+              </div>
+            </div>
+        </div>
+        <div class='autocomplete__outerWrapper'>
+          ${AutocompeleteSearchMob.render()}
         </div>
       </div>
-     </div> 
+      
+     
+     <div class="header__non-mobile">
+        ${Logo.render()}
+        <div class='autocomplete__outerWrapper'>
+          ${AutocompeleteSearchNonMob.render()}
+        </div>
+        <div class='header__action'>
+          <div class='login-or-profile__outerWrapper'>
+            ${
+							!isLoggedIn
+								? LinkButtonPrimary.render({
+										to: '/account/login',
+										display: 'Login',
+								  })
+								: ProfileDropdownNonMob.render({
+										to: '/profile',
+										display: 'Profile',
+										icon: 'user-circle',
+								  })
+						}
+          </div> 
+          <div class='cart__outerWrapper'>
+              ${LinkIconButton.render({
+								to: '/cart',
+								display: 'Cart',
+								icon: 'shopping-cart',
+							})}
+          </div>
+        </div>
+     </div>
     </header>
-    `},
+    `
+	},
 }
 
 export default Header

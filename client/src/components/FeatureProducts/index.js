@@ -33,7 +33,7 @@ class FeatureProducts {
 		)
 		let productList = await this.makeaApiRequest({ params: this.params })
 		if (productList.length) {
-			productList = productList.splice(3, 5)
+			productList = productList.splice(1, 5)
 			productListContainer.innerHTML = null
 			productListContainer.insertAdjacentHTML(
 				'beforeend',

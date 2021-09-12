@@ -15,6 +15,7 @@ import shoes2 from '../images/shoes/shoes-2.jpeg'
 import shoes3 from '../images/shoes/shoes-3.jpeg'
 import shoes4 from '../images/shoes/shoes-4.jpeg'
 import shoes5 from '../images/shoes/shoes-5.jpeg'
+import shoes6 from '../images/shoes/shoes-6.jpeg'
 
 const images = {
 	'men-1.jpg': men1,
@@ -27,7 +28,7 @@ const images = {
 	'women-3.jpeg': women3,
 	'women-4.jpeg': women4,
 	'women-5.jpeg': women5,
-
+	'shoes-6.jpeg': shoes6,
 	'shoes-5.jpeg': shoes5,
 	'shoes-4.jpeg': shoes4,
 	'shoes-3.jpeg': shoes3,

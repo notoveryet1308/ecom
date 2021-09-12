@@ -156,4 +156,64 @@ const AutocompleteSearch = {
     `,
 }
 
-export default AutocompleteSearch
+class AutocompleteSearch2 {
+	constructor(identifier) {
+		this.identifier = identifier
+	}
+
+	render() {
+		return `
+		<div class='autocomplete-container autocomplete-container--${this.identifier}'>
+		<div class='autocomplete__input'>
+			<div class='autocmplete__searchInput'>
+				<input id='searchInput'  class='searchInput--${
+					this.identifier
+				}' placeholder='Search product or brand...' />
+				<i class="ph-magnifying-glass-bold searchIcon icon"></i>
+			</div> 
+		</div>
+		<div class='autocomplete__display autocomplete__display--${this.identifier} '>
+			<div class='autocomplete__suggestion'>
+			 ${AutoSuggestionList.map((el) => SuggestionCard.render({ ...el })).join('\n')}
+			</div>
+		</div>
+	 </div>
+		`
+	}
+
+	afterRender() {
+		const searchInput = document.querySelector(
+			`.searchInput--${this.identifier}`,
+		)
+		const suggestionDisplay = document.querySelector(
+			`.autocomplete__display--${this.identifier}`,
+		)
+		const suggestionWrapper = document.querySelector(
+			'.autocomplete__suggestion',
+		)
+		searchInput.addEventListener('focus', () => {
+			suggestionDisplay.style.display = 'block'
+		})
+
+		searchInput.addEventListener('input', async (e) => {
+			const suggestionList = await debounced(e.target.value)
+			console.log({ suggestionList })
+			if (suggestionList?.data) {
+				updateUI(
+					suggestionWrapper,
+					suggestionList.data.suggestionList,
+					SuggestionCard,
+				)
+			} else {
+				updateUI(suggestionWrapper, AutoSuggestionList, SuggestionCard)
+			}
+		})
+		window.addEventListener('click', (e) => {
+			if (e.target.id !== 'searchInput') {
+				suggestionDisplay.style.display = 'none'
+			}
+		})
+	}
+}
+
+export { AutocompleteSearch, AutocompleteSearch2 }

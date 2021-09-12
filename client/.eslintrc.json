@@ -22,5 +22,6 @@
         "no-param-reassign":"warn",
         "object-curly-newline":"off",
         "radix":"off"
+        
     }
 }

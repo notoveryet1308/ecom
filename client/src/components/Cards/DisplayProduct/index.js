@@ -20,16 +20,14 @@ const DisplayProduct = {
             <p class='displayProduct-brand'>${brand}</p>
             <p class='displayProduct-name'>${name}</p>
             <div class='product-priceDetail'>
-              <p class='displayProduct-discountPrice'>₹${
-								discountPrice ? discountPrice : ''
+              <p class='displayProduct-discountPrice'>${
+								discountPrice ? `₹${discountPrice}` : ''
 							}</p>
               <p class='displayProduct-price ${
 								discountPrice ? 'inOffer' : ''
 							}'>₹${price}</p>
               <p class='displayProduct-offer'>
-               ${offPercentage ? offPercentage : ''}${
-			offPercentage ? '% off' : ''
-		}
+               ${offPercentage ? `${offPercentage}% off` : ''}
               </p>
             </div>
           </div>        
