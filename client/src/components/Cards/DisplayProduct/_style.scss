@@ -2,9 +2,11 @@
   position: relative;
   width: 100%;
   padding: 1.5rem;
+  background-color: #fff;
   .displayProduct__content{
     display: flex;
     flex-direction: column;
+    
     .displayProduct__image{
       position: relative;
       width: 100%;
@@ -29,10 +31,17 @@
         // padding-bottom: .5rem;
       }
       .displayProduct-name{
+        display: block;
         font-size: 1.4rem;
         color: #383838;
         font-weight: bold;
-        padding-bottom: .5rem;
+        padding-bottom: 1rem;
+        line-clamp: 1;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
       }
       
       .product-priceDetail{
@@ -59,4 +68,11 @@
 
     }
   }
+}
+
+.new-product{
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: #388e3c;
+  font-weight: bold;
 }

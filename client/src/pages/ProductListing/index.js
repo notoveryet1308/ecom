@@ -1,11 +1,11 @@
-import axios from 'axios'
+import { getClothingProduct } from '../../API'
+import DisplayProduct from '../../components/Cards/DisplayProduct'
+import Loader from '../../components/generalUI/Loader'
+import Header from '../../components/Header'
+import MainNavigation from '../../components/MainNvigation'
+import { images } from '../../data'
 
-const fetchData = async ({ resource, params }) => {
-	const response = await axios.get(`http://localhost:4000/api/v1/${resource}`, {
-		params: { ...params },
-	})
-	return response.data.data.products
-}
+import './_style.scss'
 
 class ProductListing {
 	constructor(resource, params) {
@@ -14,30 +14,50 @@ class ProductListing {
 	}
 
 	async render() {
-		const {
-			status,
-			data: { products },
-		} = await this.getProducts()
-		const pName = (name) => `<h3> ${name} </h3>`
-		if (status === 'error' || status === 'fail') {
-			return '<div>Error in fetching data. Please try again !!</div>'
-		}
 		return `
-		<div class="product-container">
-			<h1>Product Listing</h1>
-			${products.map((el) => pName(el.name))}
-		</div>
-	`
+		  <div class='productListing'>
+			  ${Header.render()}
+				${MainNavigation.render()}
+				<div class='productListing-content'>
+				   <div class='productListing-filter'> 
+					    <p class='productListing-filter--title'>Filters</p>
+					    <div class='productListing-filter__content'>
+							</div>
+					 </div>
+					 <div class='productListing-products'>
+					    ${Loader.render()}
+					 </div>
+				</div>
+			</div>
+	  `
 	}
 
-	async getProducts() {
-		const response = await axios.get(
-			`http://localhost:4000/api/v1/${this.resource}`,
-			{
-				params: { ...this.params },
-			},
-		)
-		return response.data
+	async afterRender() {
+		Header.afterRender()
+		MainNavigation.afterRender()
+		const productList = document.querySelector('.productListing-products')
+		const products = await getClothingProduct({ params: this.params })
+		if (products.length) {
+			productList.innerHTML = null
+			productList.style.display = 'grid'
+			productList.innerHTML = products
+				.map((el) => {
+					const { _id, name, imageUrl, type, brand, price, discountPrice } = el
+					return DisplayProduct.render({
+						id: _id,
+						imageUrl: images[imageUrl],
+						name,
+						productType: type,
+						brand,
+						price,
+						discountPrice,
+					})
+				})
+				.join('\n')
+		} else {
+			productList.innerHTML = null
+			productList.innerHTML = '<h1> NO DATA FOUND, SORRY ! </h1>'
+		}
 	}
 }
 

@@ -5,6 +5,8 @@ const calculatePercentage = (total, amount) => {
 	return percentage
 }
 
+const NewTag = '<p class="new-product">Just landed</p>'
+
 const DisplayProduct = {
 	render: ({ id, productType, name, imageUrl, brand, price, discountPrice }) => {
 		const productName = name && name.split(' ').join('-').toLowerCase()
@@ -27,7 +29,7 @@ const DisplayProduct = {
 								discountPrice ? 'inOffer' : ''
 							}'>₹${price}</p>
               <p class='displayProduct-offer'>
-               ${offPercentage ? `${offPercentage}% off` : ''}
+               ${offPercentage ? `${offPercentage}% off` : NewTag}
               </p>
             </div>
           </div>        
