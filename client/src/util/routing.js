@@ -1,14 +1,19 @@
-const routeList = ['#', '#/clothing/:subCategory/:category', '#/account/:authType', '#/offer/:deal']
+const routeList = [
+	'#',
+	'#/clothing/:subCategory/:category',
+	'#/account/:authType',
+	'#/offer/:deal',
+	'#/product/:productType/:name/:id',
+]
 
 const matchCurrentRouteAndGetParams = (resources, routes) => {
 	const currentRoute = routes.find((route) => {
 		const routeDetail = route.split('/')
-		// console.log({ routeDetail, route, resources })
 		if (resources[1] === routeDetail[1]) {
 			return routeDetail
 		}
+		return null
 	})
-	// console.log({ currentRoute })
 	return currentRoute ? currentRoute.split('/') : null
 }
 
@@ -24,7 +29,7 @@ const getRouteDetail = () => {
 			}
 		})
 	}
-	console.log({ params, resource: resources[1] })
+	// console.log({ params, resource: resources[1] })
 	return { params, resource: resources[1] }
 }
 
@@ -32,13 +37,11 @@ const handleRootRouting = () => {
 	let routeDetail = {}
 	const { hash } = window.location
 	if (!hash) {
-		// console.log('URL CHANGED')
 		window.location.replace('/#/home')
 		routeDetail = { params: null, resource: 'home' }
 	} else if (hash) {
 		routeDetail = getRouteDetail()
 	}
-
 	return routeDetail
 }
 

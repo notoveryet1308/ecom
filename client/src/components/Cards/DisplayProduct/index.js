@@ -1,9 +1,6 @@
+import calculatePercentage from '../../../util/functions'
 import './_style.scss'
-// import img from '../../../images/carosuel-1.jpeg'
-const calculatePercentage = (total, amount) => {
-	const percentage = parseInt(((total - amount) / total) * 100)
-	return percentage
-}
+
 
 const NewTag = '<p class="new-product">Just landed</p>'
 
@@ -14,7 +11,7 @@ const DisplayProduct = {
 		const offPercentage =
 			discountPrice && calculatePercentage(price, discountPrice)
 		return `<div class='displayProduct'>
-        <a href='#/${productType}/${productName}/${id}' class='displayProduct__content'>
+        <a href='#/product/${productType}/${productName}/${id}' class='displayProduct__content'>
           <div class='displayProduct__image'>
             <img src='${imageUrl}' alt='${name}-pic' />
           </div>
