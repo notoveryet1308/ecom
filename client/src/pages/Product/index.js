@@ -2,6 +2,7 @@ import Header from '../../components/Header'
 import MainNavigation from '../../components/MainNvigation'
 import { images } from '../../data'
 import calculatePercentage from '../../util/functions'
+import LocalStorage from '../../util/LocalStorage'
 import './_style.scss'
 
 const keyValuePair = ({ identifier, label, description }) => `
@@ -14,14 +15,14 @@ const keyValuePair = ({ identifier, label, description }) => `
 const showPropertyValue = ({ display, value, inStock }) => `
   <div class='showPropertyValue ${
 		inStock ? 'product-available' : ''
-	}' data-property-type="${{ display, value, inStock }}">
+	}' data-property-type="display:${display},value:${value}">
     <p class='showPropertyValue-value'>${value}</p>
     <p class='showPropertyValue-display'>${display}</p>
   </div>
 `
 
 const showProperty = ({ identifier, propertyName, values }) => `
-  <div class='showProperty-${identifier}'>
+  <div class='showProperty--${identifier}'>
      <p class='showProperty-name'>${propertyName}</p>
      <div class='showProperty-values'>
         ${values.map((el) => showPropertyValue({ ...el })).join('\n')}
@@ -34,11 +35,11 @@ class Product {
 		this.resource = resource
 		this.params = params
 		this.apiCall = apiCall
+		this.userInput = {}
 	}
 
 	async render() {
 		const product = await this.apiCall({ params: this.params })
-		console.log({ product })
 		if (product) {
 			this.apiResponse = product
 		}
@@ -52,6 +53,7 @@ class Product {
 			availableSize,
 		} = this.apiResponse
 		const offPercentage = calculatePercentage(price, discountPrice)
+		const isLoggedIn = LocalStorage.getItem('user-auth-token')
 		return `
       <div class='product'>
         ${Header.render()}
@@ -123,6 +125,58 @@ class Product {
 	async afterRender() {
 		Header.afterRender()
 		MainNavigation.afterRender()
+		const addToCartBtn = document.querySelector('.addToCart-btn')
+		const sizeNode = [
+			...document.querySelectorAll(
+				'.showProperty--availableSize .showPropertyValue',
+			),
+		]
+		sizeNode.map((node) => {
+			node.addEventListener('click', (e) => {
+				e.target.style.border = '2px solid green'
+				const selectedSize = {}
+				const dataValue = e.target.getAttribute('data-property-type').split(',')
+				dataValue.map((el) => {
+					const propetry = el.split(':')
+					selectedSize[propetry[0]] = propetry[1]
+					return null
+				})
+
+				this.userInput = { ...this.userInput, selectedSize }
+				let nextSibling = e.target.nextElementSibling
+				let prevSibling = e.target.previousElementSibling
+				while (nextSibling || prevSibling) {
+					if (nextSibling) {
+						nextSibling.style.border = '2px solid #e5e5e5'
+						nextSibling = nextSibling.nextElementSibling
+					}
+					if (prevSibling) {
+						prevSibling.style.border = '2px solid #e5e5e5'
+						prevSibling = prevSibling.previousElementSibling
+					}
+				}
+			})
+			return null
+		})
+
+		addToCartBtn.addEventListener('click', () => {
+			const cartItems = LocalStorage.getItem('cart-items')
+			if (!this.userInput.selectedSize) {
+				alert('Select size')
+				return null
+			}
+			if (cartItems && cartItems.length) {
+				cartItems.push({
+					...this.apiResponse,
+					selectedSize: this.userInput.selectedSize,
+				})
+				LocalStorage.setItem('cart-items', cartItems)
+			} else {
+				LocalStorage.setItem('cart-items', [
+					{ ...this.apiResponse, selectedSize: this.userInput.selectedSize },
+				])
+			}
+		})
 	}
 }
 

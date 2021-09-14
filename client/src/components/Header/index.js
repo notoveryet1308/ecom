@@ -71,7 +71,7 @@ const Header = {
               </div> 
               <div class='cart__outerWrapper'>
                   ${LinkIconButton.render({
-										to: '/cart',
+										to: '/viewCart',
 										display: 'Cart',
 										icon: 'shopping-cart',
 									})}
@@ -106,7 +106,7 @@ const Header = {
           </div> 
           <div class='cart__outerWrapper'>
               ${LinkIconButton.render({
-								to: '/cart',
+								to: '/viewCart',
 								display: 'Cart',
 								icon: 'shopping-cart',
 							})}

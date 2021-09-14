@@ -4,6 +4,7 @@ const routeList = [
 	'#/account/:authType',
 	'#/offer/:deal',
 	'#/product/:productType/:name/:id',
+	'#/viewcart',
 ]
 
 const matchCurrentRouteAndGetParams = (resources, routes) => {

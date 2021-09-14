@@ -1,0 +1,18 @@
+.cart{
+  width: 100%;
+  position: relative;
+}
+
+.cart-container{
+  width: 100%;
+  min-height: 90vh;
+  position: relative;
+  background: #f6f6f6;
+  padding: 2rem;
+
+  .cart-content{
+    width: 100%;
+    height: 70vh;
+    background-color: #fff;
+  }
+}

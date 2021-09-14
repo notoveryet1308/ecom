@@ -1,6 +1,7 @@
 import { getClothingProduct, getEveryDayDeal, getProductDetail } from './API'
 import './index.scss'
 import Auth from './pages/Auth'
+import Cart from './pages/Cart'
 import Home from './pages/Home'
 import Product from './pages/Product'
 import ProductListing from './pages/ProductListing'
@@ -12,6 +13,7 @@ const routesAndPages = {
 	offer: { Component: ProductListing, apiCall: getEveryDayDeal },
 	account: { Component: Auth, apiCall: null },
 	product: { Component: Product, apiCall: getProductDetail },
+	viewCart: { Component: Cart, apiCall: null },
 }
 
 const root = document.getElementById('root')
