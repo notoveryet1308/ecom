@@ -1,12 +1,22 @@
+import { images } from '../../../data'
 import calculatePercentage from '../../../util/functions'
+import './_style.scss'
 
 const CartProduct = {
-	render: ({ _id, brand, name, selectedSize, price, discountPrice }) => {
+	render: ({
+		_id,
+		brand,
+		name,
+		selectedSize,
+		price,
+		discountPrice,
+		imageUrl,
+	}) => {
 		const offPercentage = calculatePercentage(price, discountPrice)
 		return `
     <div class='cartProduct' data-product-id='${_id}'>
       <div class='cartProduct__image'>
-        <img src="" />
+        <img src="${images[imageUrl]}" />
       </div>
       <div class="cartProduct__detail">
          <p class='cartProduct-brand'>${brand}</p>
@@ -20,13 +30,13 @@ const CartProduct = {
 						}</p>
             <p class='cartProduct-price ${
 							discountPrice ? 'cartProduct-inOffer' : ''
-						}'>₹${'price'}</p>
+						}'>₹${price}</p>
             <p class='cartProduct-offerPercentage'>${
 							discountPrice ? `${offPercentage}% off` : ''
 						}</p>
          </div>
          <div class='cartProduct-remove'>
-            <button class='cartProduct-remove-btn'>
+            <button class='cartProduct-remove-btn' data-product-id='${_id}'>
               REMOVE
             </button>
          </div>

@@ -36,7 +36,9 @@ class Product {
 		this.params = params
 		this.apiCall = apiCall
 		this.userInput = {}
+		this.cartItems = [...LocalStorage.getItem('cart-items')]
 	}
+
 
 	async render() {
 		const product = await this.apiCall({ params: this.params })
@@ -44,6 +46,7 @@ class Product {
 			this.apiResponse = product
 		}
 		const {
+			_id,
 			name,
 			imageUrl,
 			brand,
@@ -53,7 +56,8 @@ class Product {
 			availableSize,
 		} = this.apiResponse
 		const offPercentage = calculatePercentage(price, discountPrice)
-		const isLoggedIn = LocalStorage.getItem('user-auth-token')
+		const inCart = this.cartItems.some((el) => el._id === _id)
+
 		return `
       <div class='product'>
         ${Header.render()}
@@ -65,10 +69,10 @@ class Product {
             </div>
             <div class='product__graphics-actions'>
               <div class='product-addToCart product-action-btn'>
-                <button class='addToCart-btn'>
-                  <i class="ph-shopping-cart-fill btn-icon"></i>
-                  <span>Add To Cart</span>
-                </button>
+							  <button class='addToCart-btn' data-inCart= '${inCart}'>
+							    <i class="ph-shopping-cart-fill btn-icon"></i>
+							    <span>${inCart ? 'Go To Cart' : 'Add To Cart'}</span>
+						    </button>
               </div>
               <div class='product-buyNow product-action-btn'>
                 <button class='buyNow-btn'>
@@ -159,22 +163,31 @@ class Product {
 			return null
 		})
 
-		addToCartBtn.addEventListener('click', () => {
+		addToCartBtn.addEventListener('click', (e) => {
+			const inCart = e.target.getAttribute('data-inCart')
 			const cartItems = LocalStorage.getItem('cart-items')
-			if (!this.userInput.selectedSize) {
+
+			if (inCart === 'true') {
+				window.location.replace('#/viewCart')
+				return null
+			}
+
+			if (inCart === 'false' && !this.userInput.selectedSize) {
 				alert('Select size')
 				return null
 			}
-			if (cartItems && cartItems.length) {
+			if (inCart === 'false' && cartItems && cartItems.length) {
 				cartItems.push({
 					...this.apiResponse,
 					selectedSize: this.userInput.selectedSize,
 				})
 				LocalStorage.setItem('cart-items', cartItems)
+				window.location.replace('#/viewCart')
 			} else {
 				LocalStorage.setItem('cart-items', [
 					{ ...this.apiResponse, selectedSize: this.userInput.selectedSize },
 				])
+				window.location.replace('#/viewCart')
 			}
 		})
 	}

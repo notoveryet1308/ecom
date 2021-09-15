@@ -1,0 +1,41 @@
+.cartPriceDetail{
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  &-label{
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1.5rem;
+    color: #878787;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  &-infoWrapper{
+    width: 100%;
+    padding: 1.5rem;
+    .cartPriceDetail-info{
+      width: 100%;
+      border-bottom: 1px dashed #e5e5e5;
+      .p-Box{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        p{
+          font-size: 1.6rem;
+          color: #212121;
+        }
+      }
+      .cartPriceDetail__totalDiscount-value{
+        color: #388e3c !important;
+      }
+      .cartPriceDetail__amountToPay{
+        padding-top: 1.5rem;
+        border-top: 1px dashed #e5e5e5;
+        p{
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
