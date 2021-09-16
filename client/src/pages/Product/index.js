@@ -39,7 +39,6 @@ class Product {
 		this.cartItems = [...LocalStorage.getItem('cart-items')]
 	}
 
-
 	async render() {
 		const product = await this.apiCall({ params: this.params })
 		if (product) {
@@ -57,7 +56,7 @@ class Product {
 		} = this.apiResponse
 		const offPercentage = calculatePercentage(price, discountPrice)
 		const inCart = this.cartItems.some((el) => el._id === _id)
-
+		const userLogged = LocalStorage.getItem('user-auth-token')
 		return `
       <div class='product'>
         ${Header.render()}
@@ -69,16 +68,18 @@ class Product {
             </div>
             <div class='product__graphics-actions'>
               <div class='product-addToCart product-action-btn'>
-							  <button class='addToCart-btn' data-inCart= '${inCart}'>
+							  <a  class='addToCart-btn' data-inCart= '${inCart}'>
 							    <i class="ph-shopping-cart-fill btn-icon"></i>
 							    <span>${inCart ? 'Go To Cart' : 'Add To Cart'}</span>
-						    </button>
+						    </a>
               </div>
               <div class='product-buyNow product-action-btn'>
-                <button class='buyNow-btn'>
+                <a href="#/${
+									userLogged ? 'checkout' : 'account/login'
+								}" class='buyNow-btn'>
                   <i class="ph-lightning-fill"></i>
                   <span>Buy Now</span>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -168,26 +169,24 @@ class Product {
 			const cartItems = LocalStorage.getItem('cart-items')
 
 			if (inCart === 'true') {
-				window.location.replace('#/viewCart')
+				e.target.href = '#/viewCart'
 				return null
 			}
 
 			if (inCart === 'false' && !this.userInput.selectedSize) {
 				alert('Select size')
-				return null
-			}
-			if (inCart === 'false' && cartItems && cartItems.length) {
+			} else if (inCart === 'false' && cartItems && cartItems.length) {
 				cartItems.push({
 					...this.apiResponse,
 					selectedSize: this.userInput.selectedSize,
 				})
 				LocalStorage.setItem('cart-items', cartItems)
-				window.location.replace('#/viewCart')
+				e.target.href = '#/viewCart'
 			} else {
 				LocalStorage.setItem('cart-items', [
 					{ ...this.apiResponse, selectedSize: this.userInput.selectedSize },
 				])
-				window.location.replace('#/viewCart')
+				e.target.href = '#/viewCart'
 			}
 		})
 	}

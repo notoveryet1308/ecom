@@ -46,13 +46,15 @@
     
     .product-action-btn{
       width: 50%;
-      button{
+      a{
+        display: block;
         width: 100%;
         padding: 1.5rem;
         border: none;
         cursor: pointer;
         color: #fff;
         font-size: 1.6rem;
+        text-align: center;
         span, i{
           pointer-events: none;
         }

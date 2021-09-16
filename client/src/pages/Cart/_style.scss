@@ -27,6 +27,7 @@
       margin: 1.5rem 0;
       .cart__placeOrder-btn{
         width: 100%;
+        display: block;
         padding: 1.5rem 2rem;
         color: #fff;
         text-transform: uppercase;
@@ -34,7 +35,8 @@
         border: none;
         background-color: #fb641b;
         letter-spacing: 1px;
-        cursor: pointer;
+        text-align: center;
+        // cursor: pointer;
       }
     }
    &-sticky{ 

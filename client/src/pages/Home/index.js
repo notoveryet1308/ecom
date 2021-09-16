@@ -20,6 +20,15 @@ const FeatureProductFootwear = new FeatureProducts(
 	'/clothing/footwear',
 )
 
+const FeatureProductTopwear = new FeatureProducts(
+	getClothingProduct,
+	{
+		subCategory: 'topwear',
+	},
+	'topwear',
+	'/clothing/topwear',
+)
+
 class Home {
 	constructor(resource, params) {
 		this.resource = resource
@@ -35,6 +44,7 @@ class Home {
 				   ${CarouselBanner.render()}
 					 ${FeautureProductInOffer.render({ featureTitle: 'Deal of the day' })}
 					 ${FeatureProductFootwear.render({ featureTitle: 'Footwear' })}
+					 ${FeatureProductTopwear.render({ featureTitle: 'Topwear' })}
 				</div>
       </div>
     `
@@ -46,6 +56,7 @@ class Home {
 		CarouselBanner.afterRender()
 		await FeautureProductInOffer.afterRender()
 		await FeatureProductFootwear.afterRender()
+		await FeatureProductTopwear.afterRender()
 	}
 }
 

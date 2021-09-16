@@ -7,7 +7,9 @@ import emptyCartImg from '../../images/cartEmpty.png'
 import { LinkButtonPrimary } from '../../components/generalUI/Button'
 
 const CartContent = {
-	render: ({ cartItems }) => `
+	render: ({ cartItems }) => {
+		const userLogged = LocalStorage.getItem('user-auth-token')
+		return `
 	<div class='cart-content'>
 	${cartItems.map((data) => CartProduct.render({ ...data })).join('\n')}
   </div>
@@ -17,13 +19,16 @@ const CartContent = {
 			  ${CartPriceDetail.render({ cartData: cartItems })}
 		  </div>
 		  <div class='cart__placeOrder'>
-			 <button class='cart__placeOrder-btn'>
+			 <a href="#/${
+					userLogged ? 'checkout' : 'account/login'
+				}" class='cart__placeOrder-btn'>
 				 Place Order
-				</button>
+				</a>
 		  </div>
 	 </div>
   </div>
-	`,
+	`
+	},
 }
 
 const CartEmpty = {

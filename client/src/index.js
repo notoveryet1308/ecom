@@ -5,6 +5,7 @@ import Cart from './pages/Cart'
 import Home from './pages/Home'
 import Product from './pages/Product'
 import ProductListing from './pages/ProductListing'
+import Checkout from './pages/Checkout'
 import { handleRootRouting, getRouteDetail } from './util/routing'
 
 const routesAndPages = {
@@ -14,6 +15,7 @@ const routesAndPages = {
 	account: { Component: Auth, apiCall: null },
 	product: { Component: Product, apiCall: getProductDetail },
 	viewCart: { Component: Cart, apiCall: null },
+	checkout: { Component: Checkout, apiCall: null },
 }
 
 const root = document.getElementById('root')

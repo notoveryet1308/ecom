@@ -9,6 +9,7 @@ const generateToken = (id) =>
   })
 
 const signup = catchAsync(async (req, res, next) => {
+  console.log({ body: req.body })
   const user = await User.create(req.body)
   const token = generateToken(user._id)
   res.status(201).json({
