@@ -20,16 +20,35 @@
   .checkout-box{
     width: 100%;
     min-height: 20rem;
-    background-color: #fff;
-
     &-label{
       font-size: 1.6rem;
-      text-transform: uppercase;
-      // background: #08bd80;
+      text-transform: capitalize;
+      background: #fff;
       padding: 1rem 1.5rem;
-      letter-spacing: 1px;
       color: #878787;
+      font-weight: bold;
       border-bottom: 1px solid #e5e5e5;
     }
   }
+  .checkout__payment{
+    
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .checkout-content{
+    display: flex;
+    column-gap: 2rem;
+    .checkout__orderSummary{
+      width: 60%;
+    }
+    .checkout-box__sticky{
+      position: sticky;
+      top: 8rem;
+    }
+    .checkout__payment{
+      width: 40%;
+    }
+  }
+  
 }

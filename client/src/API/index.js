@@ -1,4 +1,5 @@
 import axios from 'axios'
+import LocalStorage from '../util/LocalStorage'
 
 const baseUrl = 'http://localhost:4000/api/v1'
 
@@ -13,7 +14,7 @@ const getEveryDayDeal = async () => {
 }
 
 const loginUser = async ({ loginDetail }) => {
-  const response = await axios.post(`${baseUrl}/user/login`, { ...loginDetail })
+	const response = await axios.post(`${baseUrl}/user/login`, { ...loginDetail })
 	if (response.data.status === 'success') {
 		return response.data.token
 	}
@@ -21,7 +22,9 @@ const loginUser = async ({ loginDetail }) => {
 }
 
 const signupUser = async ({ signupDetail }) => {
-	const response = await axios.post(`${baseUrl}/user/signup`, { ...signupDetail })
+	const response = await axios.post(`${baseUrl}/user/signup`, {
+		...signupDetail,
+	})
 	if (response.data.status === 'success') {
 		return response.data.token
 	}
@@ -44,6 +47,20 @@ const getProductDetail = async ({ params }) => {
 	)
 	if (response.data.status === 'success') {
 		return response.data.data.product
+	}
+	return response.data
+}
+
+export const getUserByToken = async () => {
+	const token = JSON.parse(LocalStorage.getItem('user-auth-token'))
+
+	const response = await axios.get(`${baseUrl}/user/verify`, {
+		params: {
+			token,
+		},
+	})
+	if (response.data.status === 'success') {
+		return response.data.data
 	}
 	return response.data
 }

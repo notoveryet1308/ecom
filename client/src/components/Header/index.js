@@ -15,7 +15,7 @@ const ProfileDropdownMob = new DropdownBtn('profileDropdownMob', [
 	{
 		id: 'myprofileMOB',
 		display: 'My Profile',
-		onClick: () => window.location.replace('#/my-profile'),
+		onClick: () => window.location.replace('#/profile'),
 	},
 	{
 		id: 'logoutUserMOB',
@@ -27,7 +27,7 @@ const ProfileDropdownNonMob = new DropdownBtn('profileDropdownNonMob', [
 	{
 		id: 'myprofileNONMOB',
 		display: 'My Profile',
-		onClick: () => window.location.replace('#/my-profile'),
+		onClick: () => window.location.replace('#/profile'),
 	},
 	{
 		id: 'logoutUserNONMOB',
@@ -63,7 +63,6 @@ const Header = {
 													display: 'Login',
 											  })
 											: ProfileDropdownMob.render({
-													to: '/profile',
 													display: 'Profile',
 													icon: 'user-circle',
 											  })
@@ -98,7 +97,6 @@ const Header = {
 										display: 'Login',
 								  })
 								: ProfileDropdownNonMob.render({
-										to: '/profile',
 										display: 'Profile',
 										icon: 'user-circle',
 								  })

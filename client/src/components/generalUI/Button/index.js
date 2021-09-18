@@ -30,6 +30,7 @@ const LinkIconButton = {
   `
 	},
 }
+
 class LinkIconBtn {
 	constructor(identifier) {
 		this.identifier = identifier

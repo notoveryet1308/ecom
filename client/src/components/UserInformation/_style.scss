@@ -1,0 +1,59 @@
+.userInformation{
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .user-photo{
+    position: relative;
+    border: 1px dashed #e5e5e5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 20rem;
+    overflow: hidden;
+    img{
+     position: absolute;
+     top: -1rem;
+     left: 1rem;
+     transform: scale(1.1);
+    }
+  }
+  .user-detail-and-action{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     flex-wrap: wrap;
+    .user-detail{
+      position: relative;
+      padding-top: 1.5rem;
+      .param{
+        display: flex;
+        column-gap: 2rem;
+        align-items: center;
+        padding-bottom: .5rem;
+        .param-label{
+          width: 6rem;
+          font-size: 1.4rem;
+          color: #878787;
+        }
+        .param-display{
+          font-size: 1.6rem;
+        }
+      }
+    }
+    .user-action{
+      // width: 100%;
+      // display: flex;
+      padding: 1rem 0;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

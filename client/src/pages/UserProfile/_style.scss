@@ -1,0 +1,59 @@
+.userProfile{
+  position: relative;
+}
+
+.userProfile-container{
+  position: relative;
+  padding: 1.5rem;
+  min-height: calc(100vh - 12rem);
+  background-color: #f6f6f6;
+}
+
+.userProfile-content{
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  // height: 200px;
+  .userProfile-seectedTab{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 0;
+  }
+
+}
+.userProfile__tab{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // flex-wrap: wrap;
+  background-color: #fff;
+  p{
+    padding: 1.5rem;
+    width: 100%;
+    height: 100%;
+    display: block;
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #383838;
+    border: 1px solid #e5e5e5;
+    cursor: pointer;
+  }
+  .active-tab{
+    background-color: rgba(8, 189, 129, 0.05);
+    color: #08bd80;
+    border: 1px solid rgba(8, 189, 129, 0.1);
+  }
+}
+
+@media screen and (min-width: 700px){
+  .userProfile-content{
+    .userProfile-seectedTab{
+      width: 65rem;
+    }
+  }
+
+}

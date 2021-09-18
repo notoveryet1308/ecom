@@ -83,11 +83,16 @@ class Cart {
 			cartRemoveBtns.map((btnNode) => {
 				if (btnNode === e.target) {
 					const productID = e.target.getAttribute('data-product-id')
+					// filter out removed item
 					const remainingItems = this.cartItems.filter(
 						(item) => item._id !== productID,
 					)
+
+					// update cart item in localstorage
 					LocalStorage.setItem('cart-items', remainingItems)
 					this.cartItems = LocalStorage.getItem('cart-items')
+
+					// render cart with updated data
 					cartContents.innerHTML = null
 					cartContents.insertAdjacentHTML(
 						'beforeend',
@@ -95,6 +100,8 @@ class Cart {
 							.map((data) => CartProduct.render({ ...data }))
 							.join('\n'),
 					)
+
+					// update price detail with updated cart
 					priceDetailCardWrapper.innerHTML = null
 					if (this.cartItems.length) {
 						priceDetailCardWrapper.insertAdjacentHTML(

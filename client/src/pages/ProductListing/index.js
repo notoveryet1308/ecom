@@ -1,4 +1,3 @@
-import { getClothingProduct } from '../../API'
 import DisplayProduct from '../../components/Cards/DisplayProduct'
 import Loader from '../../components/generalUI/Loader'
 import Header from '../../components/Header'
@@ -20,11 +19,6 @@ class ProductListing {
 			  ${Header.render()}
 				${MainNavigation.render()}
 				<div class='productListing-content'>
-				   <div class='productListing-filter'> 
-					    <p class='productListing-filter--title'>Filters</p>
-					    <div class='productListing-filter__content'>
-							</div>
-					 </div>
 					 <div class='productListing-products'>
 					    ${Loader.render()}
 					 </div>
@@ -38,7 +32,7 @@ class ProductListing {
 		MainNavigation.afterRender()
 		const productList = document.querySelector('.productListing-products')
 		const products = await this.apiCall({ params: this.params })
-		console.log({ products })
+
 		if (products.length) {
 			productList.innerHTML = null
 			productList.style.display = 'grid'
@@ -64,3 +58,9 @@ class ProductListing {
 }
 
 export default ProductListing
+
+{/* <div class='productListing-filter'> 
+<p class='productListing-filter--title'>Filters</p>
+<div class='productListing-filter__content'>
+</div>
+</div> */}

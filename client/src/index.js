@@ -7,6 +7,8 @@ import Product from './pages/Product'
 import ProductListing from './pages/ProductListing'
 import Checkout from './pages/Checkout'
 import { handleRootRouting, getRouteDetail } from './util/routing'
+import UserProfile from './pages/UserProfile'
+import Shop from './pages/Shop'
 
 const routesAndPages = {
 	home: { Component: Home, apiCall: null },
@@ -16,6 +18,8 @@ const routesAndPages = {
 	product: { Component: Product, apiCall: getProductDetail },
 	viewCart: { Component: Cart, apiCall: null },
 	checkout: { Component: Checkout, apiCall: null },
+	profile: { Component: UserProfile, apiCall: null },
+	shop: { Component: Shop, apiCall: null },
 }
 
 const root = document.getElementById('root')
