@@ -65,10 +65,24 @@ export const getUserByToken = async () => {
 	return response.data
 }
 
+const autoSuggestionData = async (value) => {
+	const response = await axios.get(
+		'http://localhost:4000/api/v1/autoSuggestion',
+		{
+			params: { searchTerm: value },
+		},
+	)
+	if (response.data.status === 'success') {
+		return response.data.data.suggestionList
+	}
+	return response.data
+}
+
 export {
 	getEveryDayDeal,
 	loginUser,
 	signupUser,
 	getClothingProduct,
 	getProductDetail,
+	autoSuggestionData,
 }

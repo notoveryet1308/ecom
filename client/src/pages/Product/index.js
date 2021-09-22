@@ -1,7 +1,7 @@
 import Header from '../../components/Header'
 import MainNavigation from '../../components/MainNvigation'
 import { images } from '../../data'
-import calculatePercentage from '../../util/functions'
+import { calculatePercentage } from '../../util/functions'
 import LocalStorage from '../../util/LocalStorage'
 import './_style.scss'
 

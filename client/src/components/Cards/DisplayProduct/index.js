@@ -1,11 +1,18 @@
-import calculatePercentage from '../../../util/functions'
+import { calculatePercentage } from '../../../util/functions'
 import './_style.scss'
-
 
 const NewTag = '<p class="new-product">Just landed</p>'
 
 const DisplayProduct = {
-	render: ({ id, productType, name, imageUrl, brand, price, discountPrice }) => {
+	render: ({
+		id,
+		productType,
+		name,
+		imageUrl,
+		brand,
+		price,
+		discountPrice,
+	}) => {
 		const productName = name && name.split(' ').join('-').toLowerCase()
 
 		const offPercentage =

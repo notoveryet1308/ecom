@@ -1,159 +1,53 @@
-import axios from 'axios'
+import { autoSuggestionData } from '../../API'
+import { debounce } from '../../util/functions'
 import './_style.scss'
 
 const SuggestionCard = {
-	render: ({ keyname, searchProduct, searchTerm, userSearch }) => {
-		let quries = ''
-		const searchQuery = { ...searchTerm }
-		const queryParams = Object.keys(searchQuery)
-		queryParams.forEach((el, index) => {
-			const queryValue = searchQuery[el]
-			quries = quries.concat(
-				`${el}=${queryValue}${index !== queryParams.length - 1 ? '&' : ''}`,
-			)
-		})
+	render: ({ display, searchRelatedQuery, productType, userSearch }) => {
+		const searchQuery = { ...searchRelatedQuery }
 		return `
 		<div class='suggestion-card'>
-		  <a href="/#/search?${searchProduct}&${quries}" class='suggestionCard-link'>
+		  <a href="/#/${productType}/${searchQuery?.subCategory}/${
+			searchQuery?.category
+		}/${searchQuery?.tags}" class='suggestionCard-link'>
 		    <i class="ph-magnifying-glass-bold icon"></i>
 			  <span class='suggestion-label ${
 					userSearch ? 'userSearch-label' : ''
-				}'>${keyname}</span>
+				}'>${display}</span>
 		  </a>
 	  </div>
     `
 	},
 }
 
-const AutoSuggestionList = [
-	{
-		keyname: 'Mobile',
-		searchProduct: 'electronics',
-		searchTerm: {
-			category: 'mobile',
-		},
-	},
-	{
-		keyname: 'Laptop',
-		searchProduct: 'electronics',
-		searchTerm: {
-			category: 'laptop',
-		},
-	},
-	{
-		keyname: 'Tshirt - Men ',
-		searchProduct: 'fashion',
-		searchTerm: {
-			idealFor: 'men',
-			tags: ['tshirt'],
-		},
-	},
-	{
-		keyname: 'Jeans - Women ',
-		searchProduct: 'fashion',
-		searchTerm: {
-			idealFor: 'women',
-			tags: ['jeans'],
-		},
-	},
-	{
-		keyname: 'Jeans - men ',
-		searchProduct: 'fashion',
-		searchTerm: {
-			idealFor: 'men',
-			tags: ['jeans'],
-		},
-	},
-	{
-		keyname: 'Shirt - Men ',
-		searchProduct: 'fashion',
-		searchTerm: {
-			idealFor: 'men',
-			tags: ['shirt'],
-		},
-	},
-]
+const NoResult = '<p class="no-result"> No results </p>'
 
-const updateUI = (updateContainer, updatedList, updateCompnent) => {
+const updateUI = (updateContainer, updatedList, updateCompnent, option) => {
 	updateContainer.innerHTML = null
 	updateContainer.insertAdjacentHTML(
 		'beforeend',
-		updatedList.map((el) => updateCompnent.render({ ...el })).join('\n'),
+		updatedList
+			.map((el) =>
+				updateCompnent.render({ ...el, userSearch: option.userSearch }),
+			)
+			.join('\n'),
 	)
 }
 
-const debounce = function (functionToBeDebounce, delay) {
-	let timer
-	let data
-	return function (...args) {
-		const context = this
-		clearTimeout(timer)
-		timer = setTimeout(() => {
-			data = functionToBeDebounce.apply(context, args)
-		}, delay)
-		return data
+const updateSuggestionList = async (
+	value,
+	suggestionWrapper,
+	suggestionDisplay,
+) => {
+	const suggestionList = await autoSuggestionData(value)
+	suggestionDisplay.style.display = 'block'
+	if (suggestionList?.length) {
+		updateUI(suggestionWrapper, suggestionList, SuggestionCard, {
+			userSearch: true,
+		})
+	} else {
+		suggestionWrapper.innerHTML = NoResult
 	}
-}
-
-const fetchSuggetionData = async (value) => {
-	const response = await axios.get(
-		'http://localhost:4000/api/v1/autoSuggestion',
-		{
-			params: { keyname: value },
-		},
-	)
-	return response.data
-}
-const debounced = debounce(fetchSuggetionData, 300)
-
-const AutocompleteSearch = {
-	afterRender: () => {
-		const searchInput = document.getElementById('searchInput')
-		const suggestionDisplay = document.querySelector('.autocomplete__display')
-		const suggestionWrapper = document.querySelector(
-			'.autocomplete__suggestion',
-		)
-		searchInput.addEventListener('focus', () => {
-			suggestionDisplay.style.display = 'block'
-		})
-
-		searchInput.addEventListener('input', async (e) => {
-			const suggestionList = await debounced(e.target.value)
-			console.log({ suggestionList })
-			if (suggestionList?.data) {
-				updateUI(
-					suggestionWrapper,
-					suggestionList.data.suggestionList,
-					SuggestionCard,
-				)
-			} else {
-				updateUI(suggestionWrapper, AutoSuggestionList, SuggestionCard)
-			}
-		})
-		window.addEventListener('click', (e) => {
-			if (e.target.id !== 'searchInput') {
-				suggestionDisplay.style.display = 'none'
-			}
-		})
-	},
-
-	render: () => `
-     <div class='autocomplete-container'>
-      <div class='autocomplete__input'>
-        <div class='autocmplete__searchInput'>
-          <input id='searchInput' placeholder='Search product or brand...' />
-          <i class="ph-magnifying-glass-bold searchIcon icon"></i>
-        </div> 
-      </div>
-      <div class='autocomplete__display'>
-        <div class='autocomplete__suggestion'>
-         ${AutoSuggestionList.map((el) =>
-						SuggestionCard.render({ ...el }),
-					).join('\n')}
-        </div>
-      </div>
-     </div>
-    `,
 }
 
 class AutocompleteSearch2 {
@@ -166,15 +60,13 @@ class AutocompleteSearch2 {
 		<div class='autocomplete-container autocomplete-container--${this.identifier}'>
 		<div class='autocomplete__input'>
 			<div class='autocmplete__searchInput'>
-				<input id='searchInput'  class='searchInput--${
-					this.identifier
-				}' placeholder='Search product or brand...' />
+				<input id='searchInput'  class='searchInput--${this.identifier}' placeholder='Search product or brand...' />
 				<i class="ph-magnifying-glass-bold searchIcon icon"></i>
 			</div> 
 		</div>
-		<div class='autocomplete__display autocomplete__display--${this.identifier} '>
+		<div class='autocomplete__display autocomplete__display--${this.identifier}'>
 			<div class='autocomplete__suggestion'>
-			 ${AutoSuggestionList.map((el) => SuggestionCard.render({ ...el })).join('\n')}
+
 			</div>
 		</div>
 	 </div>
@@ -189,24 +81,17 @@ class AutocompleteSearch2 {
 			`.autocomplete__display--${this.identifier}`,
 		)
 		const suggestionWrapper = document.querySelector(
-			'.autocomplete__suggestion',
+			`.autocomplete__display--${this.identifier} .autocomplete__suggestion`,
 		)
-		searchInput.addEventListener('focus', () => {
-			suggestionDisplay.style.display = 'block'
-		})
 
-		searchInput.addEventListener('input', async (e) => {
-			const suggestionList = await debounced(e.target.value)
-			console.log({ suggestionList })
-			if (suggestionList?.data) {
-				updateUI(
-					suggestionWrapper,
-					suggestionList.data.suggestionList,
-					SuggestionCard,
-				)
-			} else {
-				updateUI(suggestionWrapper, AutoSuggestionList, SuggestionCard)
+		const debounced = debounce(updateSuggestionList, 300)
+		searchInput.addEventListener('focus', (e) => {
+			if (e.target.value) {
+				debounced(e.target.value, suggestionWrapper, suggestionDisplay)
 			}
+		})
+		searchInput.addEventListener('input', (e) => {
+			debounced(e.target.value, suggestionWrapper, suggestionDisplay)
 		})
 		window.addEventListener('click', (e) => {
 			if (e.target.id !== 'searchInput') {
@@ -216,4 +101,4 @@ class AutocompleteSearch2 {
 	}
 }
 
-export { AutocompleteSearch, AutocompleteSearch2 }
+export default AutocompleteSearch2

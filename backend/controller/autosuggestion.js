@@ -11,13 +11,26 @@ const createAutoSuggestion = catchAsync(async (req, res, next) => {
     },
   })
 })
+
 const getAutoSuggetionList = catchAsync(async (req, res, next) => {
-  if (!req.query.keyname) {
+  if (!req.query.searchTerm) {
     return next(new AppError('empty query', 404))
   }
-  const suggestionList = await AutoSuggestion.find({
-    keyname: { $regex: `${req.query.keyname}`, $options: 'i' },
-  })
+  // const suggestionList = await AutoSuggestion.find({
+  //   searchTerm: { text: `${req.query.searchTerm}`, $options: 'i' },
+  // })
+  const suggestionList = await AutoSuggestion.aggregate([{
+    $search:{
+      text:{
+        query:  req.query.searchTerm,
+        path: ['searchTerm'],
+        fuzzy:{
+          'maxEdits': 2.0,
+          prefixLength: 3
+        }
+      },
+    }
+  }])
 
   res.status(200).json({
     status: 'success',
@@ -26,3 +39,11 @@ const getAutoSuggetionList = catchAsync(async (req, res, next) => {
 })
 
 export { createAutoSuggestion, getAutoSuggetionList }
+
+// "keyname":"red color jeans - men",
+//     "searchProduct": "fashion",
+//     "searchTerm":{
+//         "idealFor":"men",
+//         "tags":["jeans"],
+//         "color": "red"
+//     },

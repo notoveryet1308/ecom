@@ -1,6 +1,6 @@
 const routeList = [
 	'#',
-	'#/clothing/:subCategory/:category',
+	'#/clothing/:subCategory/:category/:tags',
 	'#/account/:authType',
 	'#/offer/:deal',
 	'#/product/:productType/:name/:id',

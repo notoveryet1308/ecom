@@ -1,5 +1,5 @@
+import { calculatePercentage } from '../../../util/functions'
 import { images } from '../../../data'
-import calculatePercentage from '../../../util/functions'
 import './_style.scss'
 
 const CartProduct = {

@@ -1,5 +1,5 @@
 import LocalStorage from '../../util/LocalStorage'
-import { AutocompleteSearch2 } from '../Autocompelete'
+import AutocompleteSearch from '../Autocompelete'
 import { LinkButtonPrimary, LinkIconButton } from '../generalUI/Button'
 import DropdownBtn from '../generalUI/Button/Dropdown'
 import Logo from '../generalUI/logo'
@@ -9,8 +9,9 @@ const logoutUser = () => {
 	LocalStorage.removeItem('user-auth-token')
 	window.location.reload()
 }
-const AutocompeleteSearchMob = new AutocompleteSearch2('mobile')
-const AutocompeleteSearchNonMob = new AutocompleteSearch2('nonMobile')
+const AutocompeleteSearchMob = new AutocompleteSearch('mobile')
+const AutocompeleteSearchNonMob = new AutocompleteSearch('nonMobile')
+
 const ProfileDropdownMob = new DropdownBtn('profileDropdownMob', [
 	{
 		id: 'myprofileMOB',
