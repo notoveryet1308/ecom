@@ -71,7 +71,12 @@ const deleteProduct = catchAsync(async (req, res, next) => {
 
 const getEverydayInOfferProducts = catchAsync(async (req, res, next) => {
   let inOfferProduct = await EverydayOffer.find({})
-  inOfferProduct = inOfferProduct.map((data) => data.product)
+  inOfferProduct = inOfferProduct.map((el) => {
+    if (el.productId) {
+      return { ...el.product, _id: el.productId }
+    }
+    return null
+  })
   res.status(200).json({
     status: 'success',
     data: inOfferProduct,
