@@ -4,7 +4,8 @@
 	"description": "Client side of the ecom application",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack serve --mode development --open"
+		"start": "webpack serve --mode development --open",
+		"build": "webpack build --mode production"
 	},
 	"author": "Rahul Raj",
 	"license": "MIT",
