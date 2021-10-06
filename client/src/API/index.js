@@ -1,7 +1,10 @@
 import axios from 'axios'
 import LocalStorage from '../util/LocalStorage'
 
-const baseUrl = 'http://localhost:4000/api/v1'
+const baseUrl =
+  document.domain === 'https://infinite-peak-84010.herokuapp.com/'
+    ? 'https://infinite-peak-84010.herokuapp.com/api/v1'
+    : 'http://localhost:4000/api/v1' 
 
 const getEveryDayDeal = async () => {
 	const response = await axios.get(`${baseUrl}/product/deal-of-the-day`)
