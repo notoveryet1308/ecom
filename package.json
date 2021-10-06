@@ -21,6 +21,7 @@
     "@babel/cli": "^7.15.7",
     "@babel/preset-env": "^7.15.6",
     "@babel/runtime": "^7.15.4",
+    "@babel/runtime-corejs3": "^7.15.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
