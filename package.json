@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npm run build && node ./serverBuild/index.js",
     "clean": "rm -rf serverBuild && mkdir serverBuild",
-    "build-babel": "babel -d ./serverBuild  -s",
+    "build-babel": "babel -d ./serverBuild ./src  -s",
     "build": "npm run build-babel",
     "dev": "nodemon --exec babel-node ./src/server.js",
     "heroku-prebuild": "cd client && npm install --dev && npm run build"
