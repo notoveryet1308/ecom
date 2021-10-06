@@ -7,7 +7,7 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "npm run build && node ./serverBuild/index.js",
+    "start": "npm run build && node ./serverBuild/server.js",
     "clean": "rm -rf serverBuild && mkdir serverBuild",
     "build-babel": "babel -d ./serverBuild ./src  -s",
     "build": "npm run build-babel",
