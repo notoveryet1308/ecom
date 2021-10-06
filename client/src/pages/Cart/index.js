@@ -5,10 +5,33 @@ import LocalStorage from '../../util/LocalStorage'
 import './_style.scss'
 import emptyCartImg from '../../images/cartEmpty.png'
 import { LinkButtonPrimary } from '../../components/generalUI/Button'
+import { loadRazorpay } from '../../util/functions'
 
 const CartContent = {
-	render: ({ cartItems }) => {
-		const userLogged = LocalStorage.getItem('user-auth-token')
+	afterRender: ({ isUserLogged, cartData }) => {
+		const placeOrder = document.querySelector('.cart__placeOrder-btn')
+		placeOrder.addEventListener('click', async () => {
+			if (isUserLogged && cartData) {
+				const cartInfoData = [...cartData]
+				const { totalDiscount } = cartInfoData.reduce(
+					(prev, curr) => {
+						prev = {
+							...prev,
+							itemCount: prev.itemCount + 1,
+							totalPrice: prev.totalPrice + curr.price,
+							totalDiscount: prev.totalDiscount + curr.discountPrice,
+						}
+						return prev
+					},
+					{ itemCount: null, totalPrice: null, totalDiscount: null },
+				)
+				await loadRazorpay({ amount: totalDiscount })
+			} else {
+				placeOrder.href = '#/account/login'
+			}
+		})
+	},
+	render: function render({ cartItems }) {
 		return `
 	<div class='cart-content'>
 	${cartItems.map((data) => CartProduct.render({ ...data })).join('\n')}
@@ -19,9 +42,7 @@ const CartContent = {
 			  ${CartPriceDetail.render({ cartData: cartItems })}
 		  </div>
 		  <div class='cart__placeOrder'>
-			 <a href="#/${
-					userLogged ? 'checkout' : 'account/login'
-				}" class='cart__placeOrder-btn'>
+			 <a class='cart__placeOrder-btn'>
 				 Place Order
 				</a>
 		  </div>
@@ -68,7 +89,13 @@ class Cart {
 	}
 
 	afterRender() {
+		const userLogged = LocalStorage.getItem('user-auth-token')
+
 		Header.afterRender()
+		CartContent.afterRender({
+			isUserLogged: userLogged,
+			cartData: this.cartItems,
+		})
 
 		const cartContents = document.querySelector('.cart-content')
 		const cartContainer = document.querySelector('.cart-container')
@@ -123,3 +150,11 @@ class Cart {
 }
 
 export default Cart
+
+{
+	/* <a href="#/${
+					userLogged ? 'checkout' : 'account/login'
+				}" class='cart__placeOrder-btn'>
+				 Place Order
+				</a> */
+}

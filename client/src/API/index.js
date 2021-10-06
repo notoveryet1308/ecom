@@ -78,6 +78,22 @@ const autoSuggestionData = async (value) => {
 	return response.data
 }
 
+const getPaymentDetail = async (
+	amount = '500',
+	user = { fullname: 'Rahul Raj', email: 'rahulraz1308@gmail.com' },
+) => {
+	const response = await axios.post(`${baseUrl}/payment`, {
+		amount,
+		fullname: user.fullname,
+		email: user.email,
+	})
+
+	if (response.data.status === 'success') {
+		return response.data.data
+	}
+	return response.data
+}
+
 export {
 	getEveryDayDeal,
 	loginUser,
@@ -85,4 +101,5 @@ export {
 	getClothingProduct,
 	getProductDetail,
 	autoSuggestionData,
+	getPaymentDetail,
 }

@@ -10,6 +10,7 @@ import electronicsRouter from './router/electronics'
 import userRouter from './router/user'
 import autoSuggestionRouter from './router/autoSuggestion'
 import orderedProductRouter from './router/orderProduct'
+import paymentRouter from './router/payment'
 
 const app = express()
 
@@ -23,7 +24,7 @@ app.use('/api/v1/electronics', electronicsRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/autoSuggestion', autoSuggestionRouter)
 app.use('/api/v1/order', orderedProductRouter)
-
+app.use('/api/v1/payment', paymentRouter)
 
 app.use('*', (req, res, next) => next(new AppError('Page not found!!', 404)))
 

@@ -1,7 +1,7 @@
 import CartProduct from '../../components/Cards/CartProduct'
 import Header from '../../components/Header'
+import { loadRazorpay } from '../../util/functions'
 import LocalStorage from '../../util/LocalStorage'
-
 import './_style.scss'
 
 class Checkout {
@@ -23,9 +23,14 @@ class Checkout {
                 <div class='checkout-box-content'>
                    ${
 											this.cartItems.length
-												? this.cartItems.map((data) =>
-														CartProduct.render({ ...data }),
-												).join('\n')
+												? this.cartItems
+														.map((data) =>
+															CartProduct.render({
+																...data,
+																hideReomveBtn: true,
+															}),
+														)
+														.join('\n')
 												: ''
 										}
                 </div>
@@ -34,6 +39,7 @@ class Checkout {
                 <div class='checkout-box__sticky'>
                   <p class='checkout__payment-label checkout-box-label'>Payment</p>
                   <div class='checkout-box-content'>
+                     
                    </div>
                 </div>
             </div>

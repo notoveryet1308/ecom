@@ -2,6 +2,12 @@ import { calculatePercentage } from '../../../util/functions'
 import { images } from '../../../data'
 import './_style.scss'
 
+const reomveBtn = (_id) => `
+   <button class='cartProduct-remove-btn' data-product-id='${_id}'>
+      REMOVE
+   </button>
+`
+
 const CartProduct = {
 	render: ({
 		_id,
@@ -11,6 +17,7 @@ const CartProduct = {
 		price,
 		discountPrice,
 		imageUrl,
+		hideReomveBtn,
 	}) => {
 		const offPercentage = calculatePercentage(price, discountPrice)
 		return `
@@ -36,9 +43,7 @@ const CartProduct = {
 						}</p>
          </div>
          <div class='cartProduct-remove'>
-            <button class='cartProduct-remove-btn' data-product-id='${_id}'>
-              REMOVE
-            </button>
+             ${!hideReomveBtn ? reomveBtn(_id) : ''}
          </div>
       </div>
     </div>
