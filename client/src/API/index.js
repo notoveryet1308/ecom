@@ -2,7 +2,7 @@ import axios from 'axios'
 import LocalStorage from '../util/LocalStorage'
 
 const baseUrl =
-  document.domain === 'https://infinite-peak-84010.herokuapp.com/'
+  document.domain === 'infinite-peak-84010.herokuapp.com'
     ? 'https://infinite-peak-84010.herokuapp.com/api/v1'
     : 'http://localhost:4000/api/v1' 
 
