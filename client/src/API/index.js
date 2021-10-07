@@ -70,7 +70,7 @@ export const getUserByToken = async () => {
 
 const autoSuggestionData = async (value) => {
 	const response = await axios.get(
-		'http://localhost:4000/api/v1/autoSuggestion',
+		`${baseUrl}/autoSuggestion`,
 		{
 			params: { searchTerm: value },
 		},

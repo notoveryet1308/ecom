@@ -36,7 +36,7 @@ class Product {
 		this.params = params
 		this.apiCall = apiCall
 		this.userInput = {}
-		this.cartItems = [...LocalStorage.getItem('cart-items')]
+		this.cartItems = [LocalStorage.getItem('cart-items') ? LocalStorage.getItem('cart-items'): '']
 	}
 
 	async render() {

@@ -1,5 +1,4 @@
 import { getClothingProduct, getEveryDayDeal, getProductDetail } from './API'
-import './index.scss'
 import Auth from './pages/Auth'
 import Cart from './pages/Cart'
 import Home from './pages/Home'
@@ -9,6 +8,8 @@ import Checkout from './pages/Checkout'
 import { handleRootRouting, getRouteDetail } from './util/routing'
 import UserProfile from './pages/UserProfile'
 import Shop from './pages/Shop'
+
+import './index.scss'
 
 const routesAndPages = {
 	home: { Component: Home, apiCall: null },
