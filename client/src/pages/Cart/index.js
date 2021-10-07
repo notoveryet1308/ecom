@@ -69,11 +69,7 @@ class Cart {
 		this.resource = resource
 		this.params = params
 		this.apiCall = apiCall
-		this.cartItems = [
-      LocalStorage.getItem('cart-items')
-        ? LocalStorage.getItem('cart-items')
-        : '',
-    ]
+		this.cartItems = LocalStorage.getItem('cart-items') ?  [...LocalStorage.getItem('cart-items')]: []
 	}
 
 	render() {
@@ -82,7 +78,7 @@ class Cart {
         ${Header.render()}
         <div class='cart-container'>
            ${
-							this.cartItems.length
+							this.cartItems.length > 0
 								? CartContent.render({ cartItems: this.cartItems })
 								: CartEmpty.render()
 						}

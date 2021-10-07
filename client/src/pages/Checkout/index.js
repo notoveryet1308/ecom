@@ -9,11 +9,7 @@ class Checkout {
 		this.resource = resource
 		this.params = params
 		this.apiCall = apiCall
-		this.cartItems = [
-      LocalStorage.getItem('cart-items')
-        ? LocalStorage.getItem('cart-items')
-        : '',
-    ]
+		this.cartItems = LocalStorage.getItem('cart-items') ?  [...LocalStorage.getItem('cart-items')]: []
 	}
 
 	render() {
