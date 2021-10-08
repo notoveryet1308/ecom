@@ -36,7 +36,18 @@ class FeatureProducts {
 		if (productList.length) {
 			productList = productList.splice(1, 5)
 			productListContainer.innerHTML = null
-			productListContainer.style.display = 'grid'
+			if (innerWidth >= 500) {
+        productListContainer.style.display = 'grid'
+      } else {
+        productListContainer.style.display = 'flex'
+      }
+      window.addEventListener('resize', () => {
+        if (innerWidth >= 500) {
+          productListContainer.style.display = 'grid'
+        } else {
+          productListContainer.style.display = 'flex'
+        }
+      })
 			productListContainer.insertAdjacentHTML(
 				'beforeend',
 				productList

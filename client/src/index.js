@@ -44,3 +44,7 @@ window.addEventListener('hashchange', () => {
 	const routeInfo = getRouteDetail()
 	initApp(routeInfo)
 })
+
+const protectedRoutes = ()=>{
+	const isLoggedIn = LocalStorage.getItem('user-auth-token')
+}

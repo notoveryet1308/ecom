@@ -1,6 +1,6 @@
 .carosuelBanner-container{
   width: 100%;
-  height: 28rem;
+  height: 12rem;
   padding: 0 1.5rem;
   padding-top: 1rem;
   overflow-x: hidden;
@@ -20,15 +20,35 @@
       width: 100%;
       height: 100%;
       animation: carosuelAnimation 500ms ease;
+      cursor: default;
       .carosuelBanner-image{
         width: 100%;
         height: 100%;
         background-size: cover;
         background-position: center;
+        object-fit: cover
       }
     }
   }
 }
+
+@media screen and(min-width:400px) {
+  .carosuelBanner-container{
+    height: 15rem;
+  }
+}
+
+@media screen and(min-width:530px) {
+  .carosuelBanner-container{
+    height: 18rem;
+  }
+}
+@media screen and(min-width:600px) {
+  .carosuelBanner-container{
+    height: 24rem;
+  }
+}
+
 
 @keyframes carosuelAnimation {
   0%{

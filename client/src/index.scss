@@ -16,3 +16,10 @@ a{
   font-size: 1.6rem;
   cursor: pointer;
 }
+
+@media screen and (min-width: 1400px) {
+  .main-content-wrapper{
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+}

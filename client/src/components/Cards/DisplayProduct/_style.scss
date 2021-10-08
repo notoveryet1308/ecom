@@ -1,6 +1,6 @@
 .displayProduct{
   position: relative;
-  width: 100%;
+  width: 50%;
   padding: 1.5rem;
   background-color: #fff;
   .displayProduct__content{
@@ -75,4 +75,10 @@
   text-transform: uppercase;
   color: #388e3c;
   font-weight: bold;
+}
+
+@media screen and (min-width: 500px) {
+  .displayProduct{
+    width: 100%;
+  }
 }

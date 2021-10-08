@@ -76,7 +76,7 @@ class Cart {
 		return `
       <div class='cart'>
         ${Header.render()}
-        <div class='cart-container'>
+        <div class='cart-container main-content-wrapper'>
            ${
 							this.cartItems.length > 0
 								? CartContent.render({ cartItems: this.cartItems })

@@ -61,7 +61,7 @@ class Product {
       <div class='product'>
         ${Header.render()}
         ${MainNavigation.render()}
-        <div class='product-content'>
+        <div class='product-content main-content-wrapper'>
           <div class='product__graphics'>
             <div class='product__graphics-image'>
               <img src='${images[imageUrl]}' />

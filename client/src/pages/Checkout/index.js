@@ -39,7 +39,9 @@ class Checkout {
                 <div class='checkout-box__sticky'>
                   <p class='checkout__payment-label checkout-box-label'>Payment</p>
                   <div class='checkout-box-content'>
-                     
+                     <button class='checkout__payment-btn'>
+										   Order
+										 </button>
                    </div>
                 </div>
             </div>

@@ -34,6 +34,18 @@
     
   }
 }
+.checkout__payment-btn{
+  text-transform: uppercase;
+  width: 100%;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 2rem 0;
+  background-color: #fb641b;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
 
 @media screen and (min-width: 700px) {
   .checkout-content{

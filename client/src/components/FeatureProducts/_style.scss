@@ -23,15 +23,21 @@
       }
     }
     .featureProduct__list{
-      // display: flex;
+      display: flex;
       justify-content: center;
       align-items: center;
-      // flex-wrap: wrap;
-      display: flex;
-      grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-      grid-template-rows: auto;
+      flex-wrap: wrap;
+      
       min-height: 23rem;
       padding: 0 1.5rem;
     }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .featureProduct__list{
+      
+      grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+      grid-template-rows: auto;
   }
 }

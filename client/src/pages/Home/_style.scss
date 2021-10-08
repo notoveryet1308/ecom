@@ -1,11 +1,14 @@
 .home-container{
   width: 100%;
   position: relative;
+  background: #f6f6f6;
   .home-content{
     width: 100%;
+    margin: 0 auto;
     min-height: 100vh;
     background: #f6f6f6;
     padding-bottom: 2rem;
     // color: #08bd81;
   }
 }
+

@@ -1,26 +1,23 @@
 import './_style.scss'
-import carosuel1 from '../../images/carosuel-1.jpeg'
-import carosuel2 from '../../images/carosuel-2.jpeg'
-import carosuel3 from '../../images/carosuel-3.jpeg'
+import carosuel1 from '../../images/banner-1.jpg'
+import carosuel2 from '../../images/banner-2.jpg'
+import carosuel3 from '../../images/banner-3.jpg'
 
 const carosuelData = [
-	{
-		src: carosuel1,
-		href: '/#/electronics/mobile',
-	},
-	{
-		src: carosuel2,
-		href: '/#/electronics/mobile',
-	},
-	{
-		src: carosuel3,
-		href: '/#/fashion/men/topwear',
-	},
+  {
+    src: carosuel1,
+  },
+  {
+    src: carosuel2,
+  },
+  {
+    src: carosuel3,
+  },
 ]
 
 const Carosuel = {
-	render: ({ href, src }) => `
-    <a href='${href}' class='carosuelBanner-link ${src}'>
+  render: ({ href, src }) => `
+    <a  class='carosuelBanner-link ${src}'>
       <div class="carosuelBanner-image" style="background-image: url(${src})">
    
       </div>

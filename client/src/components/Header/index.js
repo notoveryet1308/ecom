@@ -1,4 +1,5 @@
 import LocalStorage from '../../util/LocalStorage'
+import { getRouteDetail } from '../../util/routing'
 import AutocompleteSearch from '../Autocompelete'
 import { LinkButtonPrimary, LinkIconButton } from '../generalUI/Button'
 import DropdownBtn from '../generalUI/Button/Dropdown'
@@ -6,8 +7,13 @@ import Logo from '../generalUI/logo'
 import './_style.scss'
 
 const logoutUser = () => {
-	LocalStorage.removeItem('user-auth-token')
-	window.location.reload()
+  LocalStorage.removeItem('user-auth-token')
+  const { resource } = getRouteDetail()
+  if (resource === 'profile') {
+    window.location.replace('#/home')
+  } else {
+    window.location.reload()
+  }
 }
 const AutocompeleteSearchMob = new AutocompleteSearch('mobile')
 const AutocompeleteSearchNonMob = new AutocompleteSearch('nonMobile')

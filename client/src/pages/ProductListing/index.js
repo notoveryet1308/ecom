@@ -35,7 +35,18 @@ class ProductListing {
 
 		if (products.length) {
 			productList.innerHTML = null
-			productList.style.display = 'grid'
+      if (innerWidth >= 500) {
+        productList.style.display = 'grid'
+      } else {
+        productList.style.display = 'flex'
+      }
+      window.addEventListener('resize', () => {
+        if (innerWidth >= 500) {
+          productList.style.display = 'grid'
+        } else {
+          productList.style.display = 'flex'
+        }
+      })
 			productList.innerHTML = products
 				.map((el) => {
 					const { _id, name, imageUrl, type, brand, price, discountPrice } = el

@@ -40,7 +40,7 @@ class Home {
       <div class='home-container'>
         ${Header.render()}
 				${MainNavigation.render()}
-				<div class='home-content'>
+				<div class='home-content main-content-wrapper'>
 				   ${CarouselBanner.render()}
 					 ${FeautureProductInOffer.render({ featureTitle: 'Deal of the day' })}
 					 ${FeatureProductFootwear.render({ featureTitle: 'Footwear' })}

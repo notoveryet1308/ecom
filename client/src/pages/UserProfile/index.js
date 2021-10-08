@@ -32,7 +32,7 @@ class UserProfile {
       <div class='userProfile'>
          ${Header.render()}
          ${MainNavigation.render()}
-         <div class='userProfile-container'>
+         <div class='userProfile-container main-content-wrapper'>
             <div class='userProfile__tab'>
               <p class='userProfile__tab-info profile-tab-btn active-tab' data-profile-tab='user-info'>Info</p>
               <p class='userProfile__tab-orders profile-tab-btn' data-profile-tab='user-orders'>orders</p>
